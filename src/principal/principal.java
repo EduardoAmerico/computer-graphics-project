@@ -8,6 +8,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
+import java.awt.Canvas;
 
 public class principal {
 
@@ -87,12 +88,12 @@ public class principal {
 		lblNewLabel.setBounds(26, 17, 183, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
+		GridPanel panel_1 = new GridPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBounds(401, 42, 400, 400);
 		frame.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
 	}
 }
 
