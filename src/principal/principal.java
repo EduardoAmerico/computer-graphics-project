@@ -74,12 +74,12 @@ public class principal {
 		
 		JLabel lblngulo = new JLabel("\u00C2ngulo:");
 		lblngulo.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblngulo.setBounds(134, 61, 42, 14);
+		lblngulo.setBounds(134, 46, 42, 29);
 		panel.add(lblngulo);
 		
 		JLabel lblDireo = new JLabel("Dire\u00E7\u00E3o:");
 		lblDireo.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblDireo.setBounds(134, 86, 48, 14);
+		lblDireo.setBounds(134, 71, 48, 14);
 		panel.add(lblDireo);
 		
 		JLabel lblNewLabel = new JLabel("Entrada de Dados");
@@ -95,3 +95,4 @@ public class principal {
 		frame.getContentPane().add(panel_1);
 	}
 }
+
