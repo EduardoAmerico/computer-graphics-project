@@ -2,20 +2,16 @@ package principal;
 
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
-<<<<<<< HEAD
-import java.awt.Canvas;
-=======
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.ImageIcon;
->>>>>>> 72883cae7b542f6ebe0c564ff23801a93481eb70
 
 public class principal {
 
@@ -161,9 +157,7 @@ public class principal {
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBounds(376, 42, 400, 400);
 		frame.getContentPane().add(panel_1);
-<<<<<<< HEAD
-		panel_1.setLayout(null);
-=======
+
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
@@ -414,7 +408,6 @@ public class principal {
 		lblDataGrid.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblDataGrid.setBounds(922, 17, 68, 14);
 		frame.getContentPane().add(lblDataGrid);
->>>>>>> 72883cae7b542f6ebe0c564ff23801a93481eb70
 	}
 }
 
