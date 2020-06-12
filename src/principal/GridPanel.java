@@ -31,35 +31,7 @@ public class GridPanel extends JPanel{
         // I don't trust you
         g2d = (Graphics2D) g.create();
         drawInGrid.drawGrid(g2d, this);
+        drawInGrid.drawArrow(this, g2d,300,300, 90);
         g2d.dispose();
     }
-    
-    protected void paintGrid(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D grid = (Graphics2D) g.create();
-    	int interval = 40;
-    	// draw colluns
-    	for(int i = 0; i < 10; i++ ) {
-    		grid.drawLine(getWidth() - interval * i, 0, getWidth() - interval * i, getHeight());
-    	}
-        grid.dispose();
-
-
-    }
-    
-    /*protected void paintGrid(Graphics g) {
-    	super.paintComponents(g);
-    	Graphics2D grid = (Graphics2D) g.create();
-    	int interval = 0;
-    	// draw colluns
-    	for(int i = 0; i < 10; i++ ) {
-    		grid.drawLine(getWidth() - interval, 0, getWidth() - interval, getHeight());
-    		interval += 40;
-    	}
-        grid.dispose();
-        // I don't trust you
-        grid = (Graphics2D) g.create();
-       // waveShape.draw(g2d, this);
-        grid.dispose();
-    }*/
 }

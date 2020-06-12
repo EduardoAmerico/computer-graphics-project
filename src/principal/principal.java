@@ -42,6 +42,8 @@ public class principal {
 				try {
 					principal window = new principal();
 					window.frame.setVisible(true);
+					Double angle = new Double(0);
+					System.out.println(angle = Math.atan2(10, 10));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -112,7 +114,7 @@ public class principal {
 		
 		JButton btnNewButton = new JButton("Inserir");
 		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setBackground(Color.BLACK);
+		btnNewButton.setBackground(Color.ORANGE);
 		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnNewButton.setBounds(224, 99, 90, 32);
 		panel.add(btnNewButton);
@@ -191,7 +193,7 @@ public class principal {
 		JButton btnTraslandar = new JButton("Traslandar");
 		btnTraslandar.setForeground(Color.BLACK);
 		btnTraslandar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnTraslandar.setBackground(Color.BLACK);
+		btnTraslandar.setBackground(Color.ORANGE);
 		btnTraslandar.setBounds(20, 45, 123, 29);
 		panel_2.add(btnTraslandar);
 		
@@ -232,7 +234,7 @@ public class principal {
 		JButton btnEscalonar = new JButton("Escalonar");
 		btnEscalonar.setForeground(Color.BLACK);
 		btnEscalonar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnEscalonar.setBackground(Color.BLACK);
+		btnEscalonar.setBackground(Color.ORANGE);
 		btnEscalonar.setBounds(20, 45, 123, 29);
 		panel_3.add(btnEscalonar);
 		
@@ -268,7 +270,7 @@ public class principal {
 		JButton button = new JButton("Traslandar");
 		button.setForeground(Color.BLACK);
 		button.setFont(new Font("Arial", Font.PLAIN, 12));
-		button.setBackground(Color.BLACK);
+		button.setBackground(Color.ORANGE);
 		button.setBounds(20, 45, 123, 29);
 		panel_4.add(button);
 		
@@ -322,7 +324,7 @@ public class principal {
 		JButton btnAviesPrximoAo = new JButton("Avi\u00F5es Pr\u00F3ximo ao Aeroporto");
 		btnAviesPrximoAo.setForeground(Color.BLACK);
 		btnAviesPrximoAo.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnAviesPrximoAo.setBackground(Color.BLACK);
+		btnAviesPrximoAo.setBackground(Color.ORANGE);
 		btnAviesPrximoAo.setBounds(20, 45, 214, 29);
 		panel_7.add(btnAviesPrximoAo);
 		
@@ -347,7 +349,7 @@ public class principal {
 		JButton btnAviesPrximos = new JButton("Avi\u00F5es Pr\u00F3ximos");
 		btnAviesPrximos.setForeground(Color.BLACK);
 		btnAviesPrximos.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnAviesPrximos.setBackground(Color.BLACK);
+		btnAviesPrximos.setBackground(Color.ORANGE);
 		btnAviesPrximos.setBounds(20, 45, 167, 29);
 		panel_8.add(btnAviesPrximos);
 		
@@ -372,7 +374,7 @@ public class principal {
 		JButton btnEmRotaDe = new JButton("Em Rota de Colis\u00E3o");
 		btnEmRotaDe.setForeground(Color.BLACK);
 		btnEmRotaDe.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnEmRotaDe.setBackground(Color.BLACK);
+		btnEmRotaDe.setBackground(Color.ORANGE);
 		btnEmRotaDe.setBounds(20, 45, 154, 29);
 		panel_9.add(btnEmRotaDe);
 		
@@ -397,7 +399,7 @@ public class principal {
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setBounds(0, 0, 447, 133);
 		panel_10.add(lblNewLabel_2);
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\eduar\\Desktop\\Capturara.PNG"));
+		lblNewLabel_2.setIcon(new ImageIcon(System.getProperty("user.dir")+"\\src\\img\\projeto.PNG"));
 		
 		JLabel lblRadar = new JLabel("Radar");
 		lblRadar.setFont(new Font("Arial", Font.PLAIN, 16));
