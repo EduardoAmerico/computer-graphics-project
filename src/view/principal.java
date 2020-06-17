@@ -1,4 +1,4 @@
-package principal;
+package view;
 
 import java.awt.EventQueue;
 
@@ -6,12 +6,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.border.LineBorder;
+
+import TableModel.AirplaneTableModel;
 
 public class principal {
 
@@ -290,12 +297,25 @@ public class principal {
 		textField_12.setBounds(77, 14, 58, 20);
 		panel_4.add(textField_12);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setLayout(null);
-		panel_5.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_5.setBackground(Color.WHITE);
-		panel_5.setBounds(796, 42, 324, 318);
-		frame.getContentPane().add(panel_5);
+//		JPanel panel_5 = new JPanel();
+//		panel_5.setLayout(null);
+//		panel_5.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+//		panel_5.setBackground(Color.WHITE);
+//		panel_5.setBounds(796, 42, 324, 318);
+//		frame.getContentPane().add(panel_5);
+		
+		JPanel painelFundo = new JPanel();
+		painelFundo.setBackground(Color.WHITE);
+		painelFundo.setLayout(new GridLayout(1, 1));
+		AirplaneTableModel model = new AirplaneTableModel();
+		painelFundo.setBounds(796, 42, 324, 318);
+		JTable tabela = new JTable(model);
+		tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JScrollPane barraRolagem = new JScrollPane(tabela);
+		painelFundo.add(barraRolagem);
+		painelFundo.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		frame.getContentPane().add(painelFundo);
+		
 		
 		JLabel lblRelatorio = new JLabel("Relat\u00F3rio");
 		lblRelatorio.setFont(new Font("Arial", Font.PLAIN, 16));

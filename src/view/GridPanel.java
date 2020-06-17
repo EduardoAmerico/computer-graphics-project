@@ -1,4 +1,4 @@
-package principal;
+package view;
 
 import java.awt.BasicStroke;
 import java.awt.Dimension;
