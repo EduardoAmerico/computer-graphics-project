@@ -114,11 +114,11 @@ public class AirplaneTableModel extends AbstractTableModel{
 		return false;
 	}
 
-	public Airplane getAluno(int indiceLinha) {
+	public Airplane getAirplane(int indiceLinha) {
 		return airplanes.get(indiceLinha);
 	}
 
-	public void addAluno(Airplane u) {
+	public void addAirplane(Airplane u) {
 		airplanes.add(u);
 
 		int ultimoIndice = getRowCount() - 1;
@@ -126,7 +126,7 @@ public class AirplaneTableModel extends AbstractTableModel{
 		fireTableRowsInserted(ultimoIndice, ultimoIndice);
 	}
 
-	public void removeAluno(int indiceLinha) {
+	public void removeAirplane(int indiceLinha) {
 		airplanes.remove(indiceLinha);
 
 		fireTableRowsDeleted(indiceLinha, indiceLinha);

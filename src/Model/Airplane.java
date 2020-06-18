@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Airplane {
 	
+	private int idAirplane;
 	private Double xPosition;
 	private Double yPosition;
 	private Double radius;
@@ -12,6 +13,12 @@ public class Airplane {
 	private Double direction;
 	private Double speed;
 	
+	public int getIdAirplane() {
+		return idAirplane;
+	}
+	public void setIdAirplane(int idAirplane) {
+		this.idAirplane = idAirplane;
+	}
 	public Double getxPosition() {
 		return xPosition;
 	}
