@@ -14,7 +14,7 @@ public class AirplaneTableModel extends AbstractTableModel{
 	 */
 	private static final long serialVersionUID = -6434323692626647075L;
 	private List<Airplane> airplanes;
-	private String[] colunas = new String[] { " ", "X", "Y", "R", "A", "V", "D" };
+	private String[] colunas = new String[] {"X", "Y", "R", "A", "V", "D" };
 	
 
 	public AirplaneTableModel(List<Airplane> airplanes) {
@@ -44,7 +44,6 @@ public class AirplaneTableModel extends AbstractTableModel{
 	public void setValueAt(Airplane aValue, int rowIndex) {
 		Airplane airplane = airplanes.get(rowIndex);
 
-		airplane.setSelected(aValue.isSelected());
 		airplane.setxPosition(aValue.getxPosition());
 		airplane.setyPosition(aValue.getyPosition());
 		airplane.setRadius(aValue.getRadius());
@@ -58,7 +57,6 @@ public class AirplaneTableModel extends AbstractTableModel{
 		fireTableCellUpdated(rowIndex, 3);
 		fireTableCellUpdated(rowIndex, 4);
 		fireTableCellUpdated(rowIndex, 5);
-		fireTableCellUpdated(rowIndex, 6);
 	}
 
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -66,18 +64,16 @@ public class AirplaneTableModel extends AbstractTableModel{
 
 		switch (columnIndex) {
 		case 0:
-			airplane.setSelected((boolean) aValue);
-		case 1:
 			airplane.setxPosition((Double) aValue);
-		case 2:
+		case 1:
 			airplane.setyPosition((Double) aValue);
-		case 3:
+		case 2:
 			airplane.setRadius((Double) aValue);
-		case 4:
+		case 3:
 			airplane.setAngle((Double) aValue);
-		case 5:
+		case 4:
 			airplane.setSpeed((Double) aValue);
-		case 6:
+		case 5:
 			airplane.setDirection((Double) aValue);
 		default:
 			System.err.println("Índice da coluna inválido");
@@ -90,24 +86,21 @@ public class AirplaneTableModel extends AbstractTableModel{
 		Object valueObject = null;
 		switch (columnIndex) {
 		case 0:
-			valueObject = (Boolean)airplaneSelecionado.isSelected();
-			break;
-		case 1:
 			valueObject = airplaneSelecionado.getxPosition();
 			break;
-		case 2:
+		case 1:
 			valueObject = airplaneSelecionado.getyPosition();
 			break;
-		case 3:
+		case 2:
 			valueObject = airplaneSelecionado.getRadius();
 			break;
-		case 4:
+		case 3:
 			valueObject = airplaneSelecionado.getAngle();
 			break;
-		case 5:
+		case 4:
 			valueObject = airplaneSelecionado.getSpeed();
 			break;
-		case 6:
+		case 5:
 			valueObject = airplaneSelecionado.getDirection();
 			break;
 		default:

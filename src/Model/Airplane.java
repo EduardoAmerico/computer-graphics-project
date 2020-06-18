@@ -7,7 +7,6 @@ public class Airplane {
 	
 	private Double xPosition;
 	private Double yPosition;
-	private boolean isSelected;
 	private Double radius;
 	private Double angle;
 	private Double direction;
@@ -24,12 +23,6 @@ public class Airplane {
 	}
 	public void setyPosition(Double yPosition) {
 		this.yPosition = yPosition;
-	}
-	public boolean isSelected() {
-		return isSelected;
-	}
-	public void setSelected(boolean isSelected) {
-		this.isSelected = isSelected;
 	}
 	public Double getRadius() {
 		return radius;
