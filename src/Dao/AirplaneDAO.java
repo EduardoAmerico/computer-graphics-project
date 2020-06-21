@@ -12,9 +12,12 @@ public class AirplaneDAO {
 	
 	public boolean adicionar(Airplane airplane) {
 		
+		lista.add(airplane);
+		
 		return true;
 	}
 	public boolean remover(Airplane airplane) {
+		
 		
 		return true;
 	}
