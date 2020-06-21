@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
@@ -13,9 +14,9 @@ public class drawInGrid implements GridShape {
     private static final Polygon ARROW_HEAD = new Polygon();
 
     static {
-        ARROW_HEAD.addPoint(0, 0);
-        ARROW_HEAD.addPoint(-15, -40);
-        ARROW_HEAD.addPoint(15, -40);
+    	ARROW_HEAD.addPoint(15, -15);
+    	ARROW_HEAD.addPoint(-15, -15);
+    	ARROW_HEAD.addPoint(0, 25);
     }
 
     @Override
@@ -51,24 +52,28 @@ public class drawInGrid implements GridShape {
     	}
     }
     
-	public void drawArrow(GridPanel gridPanel, Graphics2D g2d, double x, double y, double angle) {
+	public void drawArrow(GridPanel gridPanel, Graphics2D g2d, ArrayList<Plane> listPlanes) {
         // Obtém o AffineTransform original.
+		for(int i = 0; i< listPlanes.size();i++) {
         AffineTransform tx1 = g2d.getTransform();
 
         // Cria uma cópia do AffineTransform.
         AffineTransform tx2 = (AffineTransform) tx1.clone();
         
         // Translada e rotaciona o novo AffineTransform.
-        tx2.translate(x, y);
-        tx2.rotate(angle - Math.PI / 2);
+        tx2.translate(listPlanes.get(i).getX(), listPlanes.get(i).getY() );
+        tx2.rotate(Math.toRadians(listPlanes.get(i).getAngle()));
+        //tx2.rotate
         // Desenha a ponta com o AffineTransform transladado e rotacionado.
         g2d.setTransform(tx2);
         g2d.fill(ARROW_HEAD);
-
+        System.out.println(i);
         // Restaura o AffineTransform original.
         g2d.setTransform(tx1);
-		
+		}
+       
 	}
+
    
 
     

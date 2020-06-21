@@ -14,7 +14,12 @@ import javax.swing.ListSelectionModel;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.border.LineBorder;
 
@@ -40,6 +45,11 @@ public class principal {
 	private JTextField textField_13;
 	private JTextField textField_14;
 
+	private ArrayList<Plane> listPlanes = new ArrayList<Plane>();
+	private drawInGrid dig = new drawInGrid();
+	GridPanel panel_1 = new GridPanel();
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -123,6 +133,18 @@ public class principal {
 		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setBackground(Color.ORANGE);
 		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				listPlanes.add(new Plane(200, 200, 0));
+				listPlanes.add(new Plane(300, 300, 0));
+				System.out.println(listPlanes.size() + "TAMANHOOOOOOOOOOOOOOO");
+				panel_1.setList(listPlanes);
+				panel_1.repaint();
+			}
+		});
 		btnNewButton.setBounds(224, 99, 90, 32);
 		panel.add(btnNewButton);
 		
@@ -161,7 +183,7 @@ public class principal {
 		lblNewLabel.setBounds(126, 17, 129, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
-		GridPanel panel_1 = new GridPanel();
+
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBounds(376, 42, 400, 400);
@@ -201,6 +223,15 @@ public class principal {
 		btnTraslandar.setForeground(Color.BLACK);
 		btnTraslandar.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnTraslandar.setBackground(Color.ORANGE);
+		btnTraslandar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				panel_1.change();
+				panel_1.repaint();
+			}
+		});
 		btnTraslandar.setBounds(20, 45, 123, 29);
 		panel_2.add(btnTraslandar);
 		
