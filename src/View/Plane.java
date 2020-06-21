@@ -4,24 +4,41 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Plane {
-    private int x;
-    private int y;
-    private double angle;
-
-    public Plane(int x, int y, double angle) {
+    private double x, y, angle, raio, direction, velocidade;
+    
+    public Plane(double x, double y,double raio, double angle, double direction, double velocidade) {
         super();
         this.x = x;
         this.y = y;
         this.angle = angle;
+        this.raio = raio;
+        this.direction = direction;
+        this.velocidade = velocidade;
     }
     
-    public void setAngle(double angle) {
+    public double getDirection() {
+		return direction;
+	}
+
+	public void setDirection(double direction) {
+		this.direction = direction;
+	}
+
+	public double getVelocidade() {
+		return velocidade;
+	}
+
+	public void setVelocidade(double velocidade) {
+		this.velocidade = velocidade;
+	}
+
+	public void setAngle(double angle) {
     	this.angle = angle;
     }
-    public void setx(int x) {
+    public void setX(double x) {
     	this.x = x;
     }
-    public void sety(int y) {
+    public void setY(double y) {
     	this.y = y;
     }
     
@@ -29,13 +46,22 @@ public class Plane {
 		return angle;
 	}
     
-    public int getX() {
+    public double getX() {
 		return x;
 	}
     
-    public int getY() {
+    public double getY() {
 		return y;
 	}
-    
+
+	public double getRaio() {
+		return raio;
+	}
+
+	public void setRaio(double raio) {
+		this.raio = raio;
+	}
+
+
 
 }

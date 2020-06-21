@@ -15,6 +15,7 @@ import javax.swing.ListSelectionModel;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -35,7 +36,7 @@ public class principal {
 	private JTextField tfVelocidade;
 	private JTextField tfPosY1;
 	private JTextField tfAngulo1;
-	private JTextField textDirecao;
+	private JTextField tfDirecao;
 	private JTextField tfPosX3;
 	private JTextField tfPosY3;
 	private JTextField tfPosX4;
@@ -44,10 +45,11 @@ public class principal {
 	private JTextField tfDistanciaMinima;
 	private JTextField tfDistanciaMinima2;
 	private JTextField tfTempoMin;
-	private String[] colunas = new String[] {"id" , "X", "Y", "R", "A", "V", "D" };
+	private String[] colunas = new String[] { "id", "X", "Y", "R", "A", "V", "D" };
 	private DefaultTableModel model;
 	private GridPanel panelRadar = new GridPanel();
 	private ArrayList<Plane> listPlanes = new ArrayList<Plane>();
+
 	/**
 	 * Launch the application.
 	 */
@@ -136,11 +138,43 @@ public class principal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				listPlanes.add(new Plane(200, 200, 0));
-				listPlanes.add(new Plane(300, 300, 0));
-				System.out.println(listPlanes.size() + "TAMANHOOOOOOOOOOOOOOO");
-				panelRadar.setList(listPlanes);
-				panelRadar.repaint();
+				double x, y, angle, raio, velocidade, direction;
+
+				if(!tfPosX1.getText().isEmpty() && !tfPosY1.getText().isEmpty() || !tfRaio1.getText().isEmpty() && !tfAngulo1.getText().isEmpty()) {
+					if(!tfVelocidade.getText().isEmpty() && !tfDirecao.getText().isEmpty()) {
+						velocidade = Double.valueOf(tfVelocidade.getText());
+						direction = Double.valueOf(tfDirecao.getText());
+						if(tfAngulo1.getText().isEmpty() && tfRaio1.getText().isEmpty()) {
+							x = Double.valueOf(tfPosX1.getText());
+							y = Double.valueOf(tfPosY1.getText());
+							//calc angulo
+							angle = Math.atan2(y, x);
+							System.out.println("angulo>>>>" + Math.toDegrees(angle));
+							//calc raio
+							raio = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
+							System.out.println("Raio>>>>" + raio);
+						}
+						else {
+							angle = Double.valueOf(tfAngulo1.getText());
+							raio = Double.valueOf(tfRaio1.getText());
+							//calc x
+							x = raio * Math.cos(Math.toRadians(angle));
+							System.out.println("x>>>>" + x);
+							//calc y
+							y = raio * Math.sin(Math.toRadians(angle));
+							System.out.println("y>>>>" + y);
+						}
+						listPlanes.add(new Plane(x, y, raio, angle, direction, velocidade));
+						panelRadar.setList(listPlanes);
+						panelRadar.repaint();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Preencha os campos de Velocidade e Direção");
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Preencha os campos de X e Y ou Angulo e Raio!");
+				}
 			}
 		});
 		btnInserir.setBounds(224, 99, 90, 32);
@@ -170,11 +204,11 @@ public class principal {
 		tfAngulo1.setBounds(256, 43, 58, 20);
 		panelEntradaDados.add(tfAngulo1);
 		
-		textDirecao = new JTextField();
-		textDirecao.setFont(new Font("Arial", Font.PLAIN, 12));
-		textDirecao.setColumns(10);
-		textDirecao.setBounds(256, 68, 58, 20);
-		panelEntradaDados.add(textDirecao);
+		tfDirecao = new JTextField();
+		tfDirecao.setFont(new Font("Arial", Font.PLAIN, 12));
+		tfDirecao.setColumns(10);
+		tfDirecao.setBounds(256, 68, 58, 20);
+		panelEntradaDados.add(tfDirecao);
 		
 		JLabel lblEntradaDeDados = new JLabel("Entrada de Dados");
 		lblEntradaDeDados.setFont(new Font("Arial", Font.PLAIN, 16));

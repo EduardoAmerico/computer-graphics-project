@@ -49,6 +49,6 @@ public class GridPanel extends JPanel{
     public void change() {
     	listPlanes.get(0).setAngle(270);
     	listPlanes.get(1).setAngle(180);
-    	listPlanes.get(0).setx(320);
+    	listPlanes.get(0).setX(320);
     }
 }
