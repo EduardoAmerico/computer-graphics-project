@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Plane {
+	private int id;
     private double x, y, angle, raio, direction, velocidade;
     
-    public Plane(double x, double y,double raio, double angle, double direction, double velocidade) {
+    public Plane(int id, double x, double y,double raio, double angle, double direction, double velocidade) {
         super();
+        this.id = id;
         this.x = x;
         this.y = y;
         this.angle = angle;
@@ -16,12 +18,24 @@ public class Plane {
         this.velocidade = velocidade;
     }
     
-    public double getDirection() {
+    public Plane() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public double getDirection() {
 		return direction;
 	}
 
 	public void setDirection(double direction) {
 		this.direction = direction;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public double getVelocidade() {

@@ -24,7 +24,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
+import TableModel.TableModel;
 
 public class principal {
 
@@ -46,9 +50,12 @@ public class principal {
 	private JTextField tfDistanciaMinima2;
 	private JTextField tfTempoMin;
 	private String[] colunas = new String[] { "id", "X", "Y", "R", "A", "V", "D" };
-	private DefaultTableModel model;
+	private TableModel model;
 	private GridPanel panelRadar = new GridPanel();
 	private ArrayList<Plane> listPlanes = new ArrayList<Plane>();
+	private Plane plane;
+	private int id = 0;
+	private int idSelecionado = -1;
 
 	/**
 	 * Launch the application.
@@ -164,9 +171,12 @@ public class principal {
 							y = raio * Math.sin(Math.toRadians(angle));
 							System.out.println("y>>>>" + y);
 						}
-						listPlanes.add(new Plane(x, y, raio, angle, direction, velocidade));
+						listPlanes.add(new Plane(id, x, y, raio, angle, direction, velocidade));
+						reescreverTabela();
 						panelRadar.setList(listPlanes);
 						panelRadar.repaint();
+						id++;
+						zerarCampos();
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Preencha os campos de Velocidade e Direção");
@@ -260,8 +270,33 @@ public class principal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				panelRadar.change();
-				panelRadar.repaint();
+				System.out.println(idSelecionado);
+				if(idSelecionado != -1) {
+					Plane p = new Plane();
+					for(int i = 0; i < listPlanes.size(); i++) {
+						p = listPlanes.get(i);
+						if(p.getId() == idSelecionado) {
+							System.out.println("*-*-*-*-*");
+							System.out.println("Achou ó");
+							System.out.println(p.getId());
+							System.out.println(p.getX());
+							System.out.println(p.getY());
+							System.out.println("*-*-*-*-*");
+							break;
+						}
+				}
+					
+					//mudar	
+					p.setX(10);
+					p.setY(20);
+					//tem q calculçar de novo angulo e raio e mandar tbm
+					model.setValueAt(p, idSelecionado);
+				
+				}else {
+					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
+				}
+//				panelRadar.change();
+//				panelRadar.repaint();
 			}
 		});
 		btnTranslandar.setBounds(20, 45, 123, 29);
@@ -306,6 +341,40 @@ public class principal {
 		btnEscalonar.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnEscalonar.setBackground(Color.ORANGE);
 		btnEscalonar.setBounds(20, 45, 123, 29);
+		btnEscalonar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println(idSelecionado);
+				if(idSelecionado != -1) {
+					Plane p = new Plane();
+					for(int i = 0; i < listPlanes.size(); i++) {
+						p = listPlanes.get(i);
+						if(p.getId() == idSelecionado) {
+							System.out.println("*-*-*-*-*");
+							System.out.println("Achou ó");
+							System.out.println(p.getId());
+							System.out.println(p.getX());
+							System.out.println(p.getY());
+							System.out.println("*-*-*-*-*");
+							break;
+						}
+				}
+					
+					//mudar	
+					p.setX(10);
+					p.setY(20);
+					//tem q calculçar de novo angulo e raio e mandar tbm
+					model.setValueAt(p, idSelecionado);
+				
+				}else {
+					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
+				}
+//				panelRadar.change();
+//				panelRadar.repaint();
+			}
+		});
 		panelFuncTE.add(btnEscalonar);
 		
 		JPanel panelFuncTR = new JPanel();
@@ -342,6 +411,41 @@ public class principal {
 		btnRotacionar.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnRotacionar.setBackground(Color.ORANGE);
 		btnRotacionar.setBounds(20, 45, 123, 29);
+		btnRotacionar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println(idSelecionado);
+				if(idSelecionado != -1) {
+					Plane p = new Plane();
+					for(int i = 0; i < listPlanes.size(); i++) {
+						p = listPlanes.get(i);
+						if(p.getId() == idSelecionado) {
+							System.out.println("*-*-*-*-*");
+							System.out.println("Achou ó");
+							System.out.println(p.getId());
+							System.out.println(p.getX());
+							System.out.println(p.getY());
+							System.out.println("*-*-*-*-*");
+							break;
+						}
+				}
+					
+					//mudar	
+					p.setX(10);
+					p.setY(20);
+					//tem q calculçar de novo angulo e raio e mandar tbm
+					model.setValueAt(p, idSelecionado);
+				
+				}else {
+					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
+				}
+//				panelRadar.change();
+//				panelRadar.repaint();
+			}
+		});
+		
 		panelFuncTR.add(btnRotacionar);
 		
 		JLabel lblAngulo4 = new JLabel("\u00C2ngulo:");
@@ -369,11 +473,7 @@ public class principal {
 //		panel_5.setBounds(796, 42, 324, 318);
 //		frame.getContentPane().add(panel_5);
 		
-		model = new DefaultTableModel(null, colunas) {
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
+		model = new TableModel();
 
 		
 		JPanel painelDataGrid = new JPanel();
@@ -381,7 +481,14 @@ public class principal {
 		painelDataGrid.setLayout(new GridLayout(1, 1));
 		painelDataGrid.setBounds(796, 42, 324, 318);
 		JTable tabela = new JTable(model);
-		tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+
+				if (tabela.getSelectedRow() != -1) {
+					idSelecionado = (int) tabela.getValueAt(tabela.getSelectedRow(), 0);
+				}
+			}
+		});
 		JScrollPane barraRolagemDataGrid = new JScrollPane(tabela);
 		painelDataGrid.add(barraRolagemDataGrid);
 		painelDataGrid.setBorder(new LineBorder(new Color(0, 0, 0), 2));
@@ -502,4 +609,23 @@ public class principal {
 		lblDataGrid.setBounds(922, 17, 68, 14);
 		frame.getContentPane().add(lblDataGrid);
 	}
+	public void reescreverTabela() {
+		 if (!model.isEmpty()){
+	             model.limpar();          
+	        }
+		 
+		 if(!listPlanes.isEmpty()) {
+
+			 model.addListaDeUsuarios(listPlanes);
+			 }
+		 }
+	public void zerarCampos() {
+		tfPosX1.setText("");
+		tfPosY1.setText("");
+		tfAngulo1.setText("");
+		tfRaio1.setText("");
+		tfVelocidade.setText("");
+		tfDirecao.setText("");
+	}
+	
 }
