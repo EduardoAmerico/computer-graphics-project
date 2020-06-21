@@ -282,15 +282,20 @@ public class principal {
 							System.out.println(p.getX());
 							System.out.println(p.getY());
 							System.out.println("*-*-*-*-*");
+							
+							//mudar	
+							p.setX(10);
+							p.setY(20);
+							
+							listPlanes.set(i, p);
+							
+							reescreverTabela();
+							 //reescrever os desenhos tbm
 							break;
 						}
 				}
 					
-					//mudar	
-					p.setX(10);
-					p.setY(20);
-					//tem q calculçar de novo angulo e raio e mandar tbm
-					model.setValueAt(p, idSelecionado);
+					
 				
 				}else {
 					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
@@ -358,15 +363,21 @@ public class principal {
 							System.out.println(p.getX());
 							System.out.println(p.getY());
 							System.out.println("*-*-*-*-*");
+							
+							//mudar	
+							p.setX(10);
+							p.setY(20);
+							//tem q calculçar de novo angulo e raio e mandar tbm
+							
+							listPlanes.set(i, p);
+							
+							reescreverTabela();
+							 //reescrever os desenhos tbm
 							break;
 						}
 				}
 					
-					//mudar	
-					p.setX(10);
-					p.setY(20);
-					//tem q calculçar de novo angulo e raio e mandar tbm
-					model.setValueAt(p, idSelecionado);
+					
 				
 				}else {
 					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
@@ -428,15 +439,21 @@ public class principal {
 							System.out.println(p.getX());
 							System.out.println(p.getY());
 							System.out.println("*-*-*-*-*");
+							
+							//mudar	
+							p.setX(10);
+							p.setY(20);
+							//tem q calculçar de novo angulo e raio e mandar tbm
+							
+							listPlanes.set(i, p);
+							
+							reescreverTabela();
+							 //reescrever os desenhos tbm
 							break;
 						}
 				}
 					
-					//mudar	
-					p.setX(10);
-					p.setY(20);
-					//tem q calculçar de novo angulo e raio e mandar tbm
-					model.setValueAt(p, idSelecionado);
+					
 				
 				}else {
 					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
