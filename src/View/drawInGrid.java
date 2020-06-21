@@ -62,7 +62,7 @@ public class drawInGrid implements GridShape {
         
         // Translada e rotaciona o novo AffineTransform.
         tx2.translate(listPlanes.get(i).getX(), listPlanes.get(i).getY() );
-        tx2.rotate(Math.toRadians(listPlanes.get(i).getAngle()));
+        tx2.rotate(Math.toRadians(listPlanes.get(i).getDirection()));
         //tx2.rotate
         // Desenha a ponta com o AffineTransform transladado e rotacionado.
         g2d.setTransform(tx2);
