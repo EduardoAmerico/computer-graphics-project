@@ -46,6 +46,24 @@ public class GridPanel extends JPanel{
     	this.listPlanes = listPlanes;
     }
     
+    
+    public void transladar(Plane p, int id) {
+    	listPlanes.get(id).setAngle(p.getAngle());
+    	listPlanes.get(id).setRaio(p.getRaio());
+    	listPlanes.get(id).setY(p.getY());
+    	listPlanes.get(id).setX(p.getX());
+    	repaint();
+    }
+    
+    public void escalonar(Plane p, int id) {
+    	double esc;
+    	listPlanes.get(id).setAngle(p.getAngle());
+    	listPlanes.get(id).setRaio(p.getRaio());
+    	listPlanes.get(id).setY(p.getY());
+    	listPlanes.get(id).setX(p.getX());
+    	repaint();
+    }
+    
     public void change() {
     	listPlanes.get(0).setAngle(270);
     	listPlanes.get(1).setAngle(180);

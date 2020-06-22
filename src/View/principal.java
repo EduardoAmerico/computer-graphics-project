@@ -100,6 +100,17 @@ public class principal {
 		frame.getContentPane().add(panelEntradaDados);
 		panelEntradaDados.setLayout(null);
 		
+		//JLabel lbl400 = new JLabel("400 x 400");
+		//lbl400.setFont(new Font("arial", Font.PLAIN, 12));
+		//lbl400.setBounds(600, 600, 50, 50);
+		//lbl400.setBounds(x, y, width, height);
+		//panelEntradaDados.add(lbl400);
+		
+		JLabel lbl400 = new JLabel("400x400");
+		lbl400.setFont(new Font("Arial", Font.PLAIN, 16));
+		lbl400.setBounds(710, 443, 192, 14);
+		frame.getContentPane().add(lbl400);
+		
 		JLabel lblPosX1 = new JLabel("X:");
 		lblPosX1.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblPosX1.setBounds(77, 21, 11, 14);
@@ -270,14 +281,22 @@ public class principal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println(idSelecionado);
+				System.out.println("selected id> " + idSelecionado);
 				if(idSelecionado != -1) {
 					Plane p = new Plane();
-					for(int i = 0; i < listPlanes.size(); i++) {
+					p = listPlanes.get(idSelecionado);
+					p.setX(Double.valueOf(tfPosX2.getText()));
+					p.setY(Double.valueOf(tfPosY2.getText()));
+					p.setAngle(Math.atan2(p.getX(), p.getY()));
+					p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
+					listPlanes.set(idSelecionado, p);
+					reescreverTabela();
+					panelRadar.transladar(p, idSelecionado);
+					
+					
+					/*for(int i = 0; i < listPlanes.size(); i++) {
 						p = listPlanes.get(i);
 						if(p.getId() == idSelecionado) {
-							System.out.println("*-*-*-*-*");
-							System.out.println("Achou ó");
 							System.out.println(p.getId());
 							System.out.println(p.getX());
 							System.out.println(p.getY());
@@ -294,11 +313,12 @@ public class principal {
 							break;
 						}
 				}
+				*/
 					
 					
 				
 				}else {
-					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
+					JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
 				}
 //				panelRadar.change();
 //				panelRadar.repaint();
@@ -354,7 +374,15 @@ public class principal {
 				System.out.println(idSelecionado);
 				if(idSelecionado != -1) {
 					Plane p = new Plane();
-					for(int i = 0; i < listPlanes.size(); i++) {
+					p = listPlanes.get(idSelecionado);
+					p.setX(p.getX()+((p.getX()*Double.valueOf(tfPosX3.getText()))/100));
+					p.setY(p.getY()+((p.getY()*Double.valueOf(tfPosY3.getText()))/100));
+					p.setAngle(Math.atan2(p.getX(), p.getY()));
+					p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
+					listPlanes.set(idSelecionado, p);
+					reescreverTabela();
+					panelRadar.escalonar(p, idSelecionado);
+					/*for(int i = 0; i < listPlanes.size(); i++) {
 						p = listPlanes.get(i);
 						if(p.getId() == idSelecionado) {
 							System.out.println("*-*-*-*-*");
@@ -375,12 +403,12 @@ public class principal {
 							 //reescrever os desenhos tbm
 							break;
 						}
-				}
+				}*/
 					
 					
 				
 				}else {
-					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
+					JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
 				}
 //				panelRadar.change();
 //				panelRadar.repaint();
