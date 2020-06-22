@@ -106,7 +106,7 @@ public class TableModel extends AbstractTableModel {
 			valueObject = planeSelecionado.getRaio();
 			break;
 		case 4:
-			valueObject = planeSelecionado.getAngle();
+			valueObject = Math.toDegrees(planeSelecionado.getAngle());
 			break;
 		case 5:
 			valueObject = planeSelecionado.getVelocidade();
