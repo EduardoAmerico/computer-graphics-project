@@ -92,93 +92,93 @@ public class principal {
 		frame.setBounds(100, 100, 1146, 769);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JPanel panelEntradaDados = new JPanel();
 		panelEntradaDados.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelEntradaDados.setBackground(Color.WHITE);
 		panelEntradaDados.setBounds(26, 42, 334, 150);
 		frame.getContentPane().add(panelEntradaDados);
 		panelEntradaDados.setLayout(null);
-		
-		//JLabel lbl400 = new JLabel("400 x 400");
-		//lbl400.setFont(new Font("arial", Font.PLAIN, 12));
-		//lbl400.setBounds(600, 600, 50, 50);
-		//lbl400.setBounds(x, y, width, height);
-		//panelEntradaDados.add(lbl400);
-		
+
+		// JLabel lbl400 = new JLabel("400 x 400");
+		// lbl400.setFont(new Font("arial", Font.PLAIN, 12));
+		// lbl400.setBounds(600, 600, 50, 50);
+		// lbl400.setBounds(x, y, width, height);
+		// panelEntradaDados.add(lbl400);
+
 		JLabel lbl400 = new JLabel("400x400");
 		lbl400.setFont(new Font("Arial", Font.PLAIN, 16));
 		lbl400.setBounds(710, 443, 192, 14);
 		frame.getContentPane().add(lbl400);
-		
+
 		JLabel lblPosX1 = new JLabel("X:");
 		lblPosX1.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblPosX1.setBounds(77, 21, 11, 14);
 		panelEntradaDados.add(lblPosX1);
-		
+
 		JLabel lblRaio = new JLabel("Raio:");
 		lblRaio.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblRaio.setBounds(59, 46, 29, 14);
 		panelEntradaDados.add(lblRaio);
-		
+
 		JLabel lblVelocidade = new JLabel("Velocidade:");
 		lblVelocidade.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblVelocidade.setBounds(23, 71, 65, 14);
 		panelEntradaDados.add(lblVelocidade);
-		
+
 		JLabel lblPosY1 = new JLabel("Y:");
 		lblPosY1.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblPosY1.setBounds(234, 21, 12, 14);
 		panelEntradaDados.add(lblPosY1);
-		
+
 		JLabel lblAngulo1 = new JLabel("\u00C2ngulo:");
 		lblAngulo1.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblAngulo1.setBounds(204, 46, 42, 14);
 		panelEntradaDados.add(lblAngulo1);
-		
+
 		JLabel lblDirecao = new JLabel("Dire\u00E7\u00E3o:");
 		lblDirecao.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblDirecao.setBounds(198, 71, 48, 14);
 		panelEntradaDados.add(lblDirecao);
-		
+
 		tfPosX1 = new JTextField();
 		tfPosX1.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfPosX1.setBounds(98, 18, 58, 20);
 		panelEntradaDados.add(tfPosX1);
 		tfPosX1.setColumns(10);
-		
+
 		JButton btnInserir = new JButton("Inserir");
 		btnInserir.setForeground(Color.BLACK);
 		btnInserir.setBackground(Color.ORANGE);
 		btnInserir.setFont(new Font("Arial", Font.PLAIN, 12));
-	    btnInserir.addActionListener(new ActionListener() {
-			
+		btnInserir.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				double x, y, angle, raio, velocidade, direction;
 
-				if(!tfPosX1.getText().isEmpty() && !tfPosY1.getText().isEmpty() || !tfRaio1.getText().isEmpty() && !tfAngulo1.getText().isEmpty()) {
-					if(!tfVelocidade.getText().isEmpty() && !tfDirecao.getText().isEmpty()) {
+				if (!tfPosX1.getText().isEmpty() && !tfPosY1.getText().isEmpty()
+						|| !tfRaio1.getText().isEmpty() && !tfAngulo1.getText().isEmpty()) {
+					if (!tfVelocidade.getText().isEmpty() && !tfDirecao.getText().isEmpty()) {
 						velocidade = Double.valueOf(tfVelocidade.getText());
 						direction = Double.valueOf(tfDirecao.getText());
-						if(tfAngulo1.getText().isEmpty() && tfRaio1.getText().isEmpty()) {
+						if (tfAngulo1.getText().isEmpty() && tfRaio1.getText().isEmpty()) {
 							x = Double.valueOf(tfPosX1.getText());
 							y = Double.valueOf(tfPosY1.getText());
-							//calc angulo
+							// calc angulo
 							angle = Math.atan2(y, x);
 							System.out.println("angulo>>>>" + Math.toDegrees(angle));
-							//calc raio
+							// calc raio
 							raio = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
 							System.out.println("Raio>>>>" + raio);
-						}
-						else {
+						} else {
 							angle = Double.valueOf(tfAngulo1.getText());
 							raio = Double.valueOf(tfRaio1.getText());
-							//calc x
+							// calc x
 							x = raio * Math.cos(Math.toRadians(angle));
 							System.out.println("x>>>>" + x);
-							//calc y
+							// calc y
 							y = raio * Math.sin(Math.toRadians(angle));
 							System.out.println("y>>>>" + y);
 						}
@@ -188,137 +188,126 @@ public class principal {
 						panelRadar.repaint();
 						id++;
 						zerarCampos();
-					}
-					else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Preencha os campos de Velocidade e Direção");
 					}
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Preencha os campos de X e Y ou Angulo e Raio!");
 				}
 			}
 		});
 		btnInserir.setBounds(224, 99, 90, 32);
 		panelEntradaDados.add(btnInserir);
-		
+
 		tfRaio1 = new JTextField();
 		tfRaio1.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfRaio1.setColumns(10);
 		tfRaio1.setBounds(98, 43, 58, 20);
 		panelEntradaDados.add(tfRaio1);
-		
+
 		tfVelocidade = new JTextField();
 		tfVelocidade.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfVelocidade.setColumns(10);
 		tfVelocidade.setBounds(98, 68, 58, 20);
 		panelEntradaDados.add(tfVelocidade);
-		
+
 		tfPosY1 = new JTextField();
 		tfPosY1.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfPosY1.setColumns(10);
 		tfPosY1.setBounds(256, 18, 58, 20);
 		panelEntradaDados.add(tfPosY1);
-		
+
 		tfAngulo1 = new JTextField();
 		tfAngulo1.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfAngulo1.setColumns(10);
 		tfAngulo1.setBounds(256, 43, 58, 20);
 		panelEntradaDados.add(tfAngulo1);
-		
+
 		tfDirecao = new JTextField();
 		tfDirecao.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfDirecao.setColumns(10);
 		tfDirecao.setBounds(256, 68, 58, 20);
 		panelEntradaDados.add(tfDirecao);
-		
+
 		JLabel lblEntradaDeDados = new JLabel("Entrada de Dados");
 		lblEntradaDeDados.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblEntradaDeDados.setBounds(126, 17, 129, 14);
 		frame.getContentPane().add(lblEntradaDeDados);
-		
 
 		panelRadar.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelRadar.setBackground(Color.WHITE);
 		panelRadar.setBounds(376, 42, 400, 400);
 		frame.getContentPane().add(panelRadar);
 
-		
 		JPanel panelFuncTT = new JPanel();
 		panelFuncTT.setLayout(null);
 		panelFuncTT.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelFuncTT.setBackground(Color.WHITE);
 		panelFuncTT.setBounds(26, 228, 162, 97);
 		frame.getContentPane().add(panelFuncTT);
-		
+
 		JLabel lbPosX2 = new JLabel("X:");
 		lbPosX2.setFont(new Font("Arial", Font.PLAIN, 12));
 		lbPosX2.setBounds(20, 20, 11, 14);
 		panelFuncTT.add(lbPosX2);
-		
+
 		JLabel lbPosY2 = new JLabel("Y:");
 		lbPosY2.setFont(new Font("Arial", Font.PLAIN, 12));
 		lbPosY2.setBounds(86, 20, 12, 14);
 		panelFuncTT.add(lbPosY2);
-		
+
 		tfPosX2 = new JTextField();
 		tfPosX2.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfPosX2.setColumns(10);
 		tfPosX2.setBounds(41, 17, 35, 20);
 		panelFuncTT.add(tfPosX2);
-		
+
 		tfPosY2 = new JTextField();
 		tfPosY2.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfPosY2.setColumns(10);
 		tfPosY2.setBounds(108, 17, 35, 20);
 		panelFuncTT.add(tfPosY2);
-		
+
 		JButton btnTranslandar = new JButton("Translandar");
 		btnTranslandar.setForeground(Color.BLACK);
 		btnTranslandar.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnTranslandar.setBackground(Color.ORANGE);
 		btnTranslandar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				System.out.println("selected id> " + idSelecionado);
-				if(idSelecionado != -1) {
-					Plane p = new Plane();
-					p = listPlanes.get(idSelecionado);
-					p.setX(Double.valueOf(tfPosX2.getText()));
-					p.setY(Double.valueOf(tfPosY2.getText()));
-					p.setAngle(Math.atan2(p.getX(), p.getY()));
-					p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
-					listPlanes.set(idSelecionado, p);
-					reescreverTabela();
-					panelRadar.transladar(p, idSelecionado);
-					
-					
-					/*for(int i = 0; i < listPlanes.size(); i++) {
-						p = listPlanes.get(i);
-						if(p.getId() == idSelecionado) {
-							System.out.println(p.getId());
-							System.out.println(p.getX());
-							System.out.println(p.getY());
-							System.out.println("*-*-*-*-*");
-							
-							//mudar	
-							p.setX(10);
-							p.setY(20);
-							
-							listPlanes.set(i, p);
-							
-							reescreverTabela();
-							 //reescrever os desenhos tbm
-							break;
-						}
-				}
-				*/
-					
-					
-				
-				}else {
-					JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
+				if (!tfPosX2.getText().isEmpty() && !tfPosY2.getText().isEmpty()) {
+					if (idSelecionado != -1) {
+						Plane p = new Plane();
+						p = listPlanes.get(idSelecionado);
+						p.setX(Double.valueOf(tfPosX2.getText()));
+						p.setY(Double.valueOf(tfPosY2.getText()));
+						p.setAngle(Math.atan2(p.getX(), p.getY()));
+						p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
+						listPlanes.set(idSelecionado, p);
+						reescreverTabela();
+						panelRadar.transform(p, idSelecionado);
+
+						/*
+						 * for(int i = 0; i < listPlanes.size(); i++) { p = listPlanes.get(i);
+						 * if(p.getId() == idSelecionado) { System.out.println(p.getId());
+						 * System.out.println(p.getX()); System.out.println(p.getY());
+						 * System.out.println("*-*-*-*-*");
+						 * 
+						 * //mudar p.setX(10); p.setY(20);
+						 * 
+						 * listPlanes.set(i, p);
+						 * 
+						 * reescreverTabela(); //reescrever os desenhos tbm break; } }
+						 */
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Preencha os campos!");
 				}
 //				panelRadar.change();
 //				panelRadar.repaint();
@@ -326,201 +315,196 @@ public class principal {
 		});
 		btnTranslandar.setBounds(20, 45, 123, 29);
 		panelFuncTT.add(btnTranslandar);
-		
+
 		JLabel lblFunoDeTransformao = new JLabel("Fun\u00E7\u00E3o de Transforma\u00E7\u00E3o");
 		lblFunoDeTransformao.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblFunoDeTransformao.setBounds(107, 203, 192, 14);
 		frame.getContentPane().add(lblFunoDeTransformao);
-		
+
 		JPanel panelFuncTE = new JPanel();
 		panelFuncTE.setLayout(null);
 		panelFuncTE.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelFuncTE.setBackground(Color.WHITE);
 		panelFuncTE.setBounds(198, 228, 162, 97);
 		frame.getContentPane().add(panelFuncTE);
-		
+
 		JLabel lbPosX3 = new JLabel("X:");
 		lbPosX3.setFont(new Font("Arial", Font.PLAIN, 12));
 		lbPosX3.setBounds(20, 20, 11, 14);
 		panelFuncTE.add(lbPosX3);
-		
+
 		JLabel lbPosY3 = new JLabel("Y:");
 		lbPosY3.setFont(new Font("Arial", Font.PLAIN, 12));
 		lbPosY3.setBounds(86, 20, 12, 14);
 		panelFuncTE.add(lbPosY3);
-		
+
 		tfPosX3 = new JTextField();
 		tfPosX3.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfPosX3.setColumns(10);
 		tfPosX3.setBounds(41, 17, 35, 20);
 		panelFuncTE.add(tfPosX3);
-		
+
 		tfPosY3 = new JTextField();
 		tfPosY3.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfPosY3.setColumns(10);
 		tfPosY3.setBounds(108, 17, 35, 20);
 		panelFuncTE.add(tfPosY3);
-		
+
 		JButton btnEscalonar = new JButton("Escalonar");
 		btnEscalonar.setForeground(Color.BLACK);
 		btnEscalonar.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnEscalonar.setBackground(Color.ORANGE);
 		btnEscalonar.setBounds(20, 45, 123, 29);
 		btnEscalonar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				System.out.println(idSelecionado);
-				if(idSelecionado != -1) {
-					Plane p = new Plane();
-					p = listPlanes.get(idSelecionado);
-					p.setX(p.getX()+((p.getX()*Double.valueOf(tfPosX3.getText()))/100));
-					p.setY(p.getY()+((p.getY()*Double.valueOf(tfPosY3.getText()))/100));
-					p.setAngle(Math.atan2(p.getX(), p.getY()));
-					p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
-					listPlanes.set(idSelecionado, p);
-					reescreverTabela();
-					panelRadar.escalonar(p, idSelecionado);
-					/*for(int i = 0; i < listPlanes.size(); i++) {
-						p = listPlanes.get(i);
-						if(p.getId() == idSelecionado) {
-							System.out.println("*-*-*-*-*");
-							System.out.println("Achou ó");
-							System.out.println(p.getId());
-							System.out.println(p.getX());
-							System.out.println(p.getY());
-							System.out.println("*-*-*-*-*");
-							
-							//mudar	
-							p.setX(10);
-							p.setY(20);
-							//tem q calculçar de novo angulo e raio e mandar tbm
-							
-							listPlanes.set(i, p);
-							
-							reescreverTabela();
-							 //reescrever os desenhos tbm
-							break;
-						}
-				}*/
-					
-					
-				
-				}else {
-					JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
+				if (!tfPosX3.getText().isEmpty() && !tfPosY3.getText().isEmpty()) {
+					if (idSelecionado != -1) {
+						Plane p = new Plane();
+						p = listPlanes.get(idSelecionado);
+						p.setX(p.getX() + ((p.getX() * Double.valueOf(tfPosX3.getText())) / 100));
+						p.setY(p.getY() + ((p.getY() * Double.valueOf(tfPosY3.getText())) / 100));
+						p.setAngle(Math.atan2(p.getX(), p.getY()));
+						p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
+						listPlanes.set(idSelecionado, p);
+						reescreverTabela();
+						panelRadar.transform(p, idSelecionado);
+						/*
+						 * for(int i = 0; i < listPlanes.size(); i++) { p = listPlanes.get(i);
+						 * if(p.getId() == idSelecionado) { System.out.println("*-*-*-*-*");
+						 * System.out.println("Achou ó"); System.out.println(p.getId());
+						 * System.out.println(p.getX()); System.out.println(p.getY());
+						 * System.out.println("*-*-*-*-*");
+						 * 
+						 * //mudar p.setX(10); p.setY(20); //tem q calculçar de novo angulo e raio e
+						 * mandar tbm
+						 * 
+						 * listPlanes.set(i, p);
+						 * 
+						 * reescreverTabela(); //reescrever os desenhos tbm break; } }
+						 */
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Preencha os campos!");
 				}
 //				panelRadar.change();
 //				panelRadar.repaint();
 			}
 		});
 		panelFuncTE.add(btnEscalonar);
-		
+
 		JPanel panelFuncTR = new JPanel();
 		panelFuncTR.setLayout(null);
 		panelFuncTR.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelFuncTR.setBackground(Color.WHITE);
 		panelFuncTR.setBounds(26, 345, 334, 97);
 		frame.getContentPane().add(panelFuncTR);
-		
+
 		JLabel lbPosX4 = new JLabel("X:");
 		lbPosX4.setFont(new Font("Arial", Font.PLAIN, 12));
 		lbPosX4.setBounds(171, 48, 11, 14);
 		panelFuncTR.add(lbPosX4);
-		
+
 		JLabel lbPosy4 = new JLabel("Y:");
 		lbPosy4.setFont(new Font("Arial", Font.PLAIN, 12));
 		lbPosy4.setBounds(237, 48, 12, 14);
 		panelFuncTR.add(lbPosy4);
-		
+
 		tfPosX4 = new JTextField();
 		tfPosX4.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfPosX4.setColumns(10);
 		tfPosX4.setBounds(192, 45, 35, 20);
 		panelFuncTR.add(tfPosX4);
-		
+
 		tfPosy4 = new JTextField();
 		tfPosy4.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfPosy4.setColumns(10);
 		tfPosy4.setBounds(259, 45, 35, 20);
 		panelFuncTR.add(tfPosy4);
-		
+
 		JButton btnRotacionar = new JButton("Rotacionar");
 		btnRotacionar.setForeground(Color.BLACK);
 		btnRotacionar.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnRotacionar.setBackground(Color.ORANGE);
 		btnRotacionar.setBounds(20, 45, 123, 29);
 		btnRotacionar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				System.out.println(idSelecionado);
-				if(idSelecionado != -1) {
+				if(!tfPosX4.getText().isEmpty() && !tfPosy4.getText().isEmpty() && !tfAngulo4.getText().isEmpty()) {
+				if (idSelecionado != -1) {
 					Plane p = new Plane();
-					for(int i = 0; i < listPlanes.size(); i++) {
-						p = listPlanes.get(i);
-						if(p.getId() == idSelecionado) {
-							System.out.println("*-*-*-*-*");
-							System.out.println("Achou ó");
-							System.out.println(p.getId());
-							System.out.println(p.getX());
-							System.out.println(p.getY());
-							System.out.println("*-*-*-*-*");
-							
-							//mudar	
-							p.setX(10);
-							p.setY(20);
-							//tem q calculçar de novo angulo e raio e mandar tbm
-							
-							listPlanes.set(i, p);
-							
-							reescreverTabela();
-							 //reescrever os desenhos tbm
-							break;
-						}
-				}
-					
-					
-				
-				}else {
+					p = listPlanes.get(idSelecionado);
+					p.setX((p.getX() * Math.cos(Double.valueOf(tfAngulo4.getText())))
+							- (p.getY() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
+					p.setY((p.getY() * Math.cos(Double.valueOf(tfAngulo4.getText())))
+							+ (p.getX() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
+					p.setAngle(Math.atan2(p.getX(), p.getY()));
+					p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
+					listPlanes.set(idSelecionado, p);
+					reescreverTabela();
+					panelRadar.transform(p, idSelecionado);
+					/*
+					 * for(int i = 0; i < listPlanes.size(); i++) { p = listPlanes.get(i);
+					 * if(p.getId() == idSelecionado) { System.out.println("*-*-*-*-*");
+					 * System.out.println("Achou ó"); System.out.println(p.getId());
+					 * System.out.println(p.getX()); System.out.println(p.getY());
+					 * System.out.println("*-*-*-*-*");
+					 * 
+					 * //mudar p.setX(10); p.setY(20); //tem q calculçar de novo angulo e raio e
+					 * mandar tbm
+					 * 
+					 * listPlanes.set(i, p);
+					 * 
+					 * reescreverTabela(); //reescrever os desenhos tbm break; } }
+					 */
+
+				} else {
 					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
 				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Preencha os campos!");
+			}
 //				panelRadar.change();
 //				panelRadar.repaint();
 			}
 		});
-		
+
 		panelFuncTR.add(btnRotacionar);
-		
+
 		JLabel lblAngulo4 = new JLabel("\u00C2ngulo:");
 		lblAngulo4.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblAngulo4.setBounds(20, 17, 47, 14);
 		panelFuncTR.add(lblAngulo4);
-		
+
 		JLabel lblCentroDeRotao = new JLabel("Centro de Rota\u00E7\u00E3o:");
 		lblCentroDeRotao.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblCentroDeRotao.setBounds(170, 17, 124, 14);
 		panelFuncTR.add(lblCentroDeRotao);
-		
+
 		tfAngulo4 = new JTextField();
 		tfAngulo4.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfAngulo4.setColumns(10);
 		tfAngulo4.setBounds(77, 14, 58, 20);
 		panelFuncTR.add(tfAngulo4);
-		
-		
-		
+
 //		JPanel panel_5 = new JPanel();
 //		panel_5.setLayout(null);
 //		panel_5.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 //		panel_5.setBackground(Color.WHITE);
 //		panel_5.setBounds(796, 42, 324, 318);
 //		frame.getContentPane().add(panel_5);
-		
+
 		model = new TableModel();
 
-		
 		JPanel painelDataGrid = new JPanel();
 		painelDataGrid.setBackground(Color.WHITE);
 		painelDataGrid.setLayout(new GridLayout(1, 1));
@@ -538,132 +522,133 @@ public class principal {
 		painelDataGrid.add(barraRolagemDataGrid);
 		painelDataGrid.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		frame.getContentPane().add(painelDataGrid);
-		
-		
+
 		JLabel lblRelatorio = new JLabel("Relat\u00F3rio");
 		lblRelatorio.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblRelatorio.setBounds(922, 371, 65, 14);
 		frame.getContentPane().add(lblRelatorio);
-		
+
 		JPanel panelRelatorio = new JPanel();
 		panelRelatorio.setLayout(null);
 		panelRelatorio.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelRelatorio.setBackground(Color.WHITE);
 		panelRelatorio.setBounds(796, 399, 324, 247);
 		frame.getContentPane().add(panelRelatorio);
-		
+
 		JLabel lblFunesDeRastreamento = new JLabel("Fun\u00E7\u00F5es de Rastreamento");
 		lblFunesDeRastreamento.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblFunesDeRastreamento.setBounds(294, 453, 192, 14);
 		frame.getContentPane().add(lblFunesDeRastreamento);
-		
+
 		JPanel panelFuncRAPA = new JPanel();
 		panelFuncRAPA.setLayout(null);
 		panelFuncRAPA.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelFuncRAPA.setBackground(Color.WHITE);
 		panelFuncRAPA.setBounds(26, 478, 251, 97);
 		frame.getContentPane().add(panelFuncRAPA);
-		
+
 		JButton btnAviProxA = new JButton("Avi\u00F5es Pr\u00F3ximo ao Aeroporto");
 		btnAviProxA.setForeground(Color.BLACK);
 		btnAviProxA.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnAviProxA.setBackground(Color.ORANGE);
 		btnAviProxA.setBounds(20, 45, 214, 29);
 		panelFuncRAPA.add(btnAviProxA);
-		
+
 		JLabel lblDistanciaMinima = new JLabel("Dist\u00E2ncia M\u00EDnima:");
 		lblDistanciaMinima.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblDistanciaMinima.setBounds(20, 17, 97, 14);
 		panelFuncRAPA.add(lblDistanciaMinima);
-		
+
 		tfDistanciaMinima = new JTextField();
 		tfDistanciaMinima.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfDistanciaMinima.setColumns(10);
 		tfDistanciaMinima.setBounds(127, 14, 60, 20);
 		panelFuncRAPA.add(tfDistanciaMinima);
-		
+
 		JPanel panelFuncRAP = new JPanel();
 		panelFuncRAP.setLayout(null);
 		panelFuncRAP.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelFuncRAP.setBackground(Color.WHITE);
 		panelFuncRAP.setBounds(294, 478, 210, 97);
 		frame.getContentPane().add(panelFuncRAP);
-		
+
 		JButton btnAviProx = new JButton("Avi\u00F5es Pr\u00F3ximos");
 		btnAviProx.setForeground(Color.BLACK);
 		btnAviProx.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnAviProx.setBackground(Color.ORANGE);
 		btnAviProx.setBounds(20, 45, 167, 29);
 		panelFuncRAP.add(btnAviProx);
-		
+
 		JLabel lblDistanciaMinima2 = new JLabel("Dist\u00E2ncia M\u00EDnima:");
 		lblDistanciaMinima2.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblDistanciaMinima2.setBounds(20, 17, 97, 14);
 		panelFuncRAP.add(lblDistanciaMinima2);
-		
+
 		tfDistanciaMinima2 = new JTextField();
 		tfDistanciaMinima2.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfDistanciaMinima2.setColumns(10);
 		tfDistanciaMinima2.setBounds(127, 14, 60, 20);
 		panelFuncRAP.add(tfDistanciaMinima2);
-		
+
 		JPanel panelFuncRRC = new JPanel();
 		panelFuncRRC.setLayout(null);
 		panelFuncRRC.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelFuncRRC.setBackground(Color.WHITE);
 		panelFuncRRC.setBounds(516, 478, 192, 97);
 		frame.getContentPane().add(panelFuncRRC);
-		
+
 		JButton btnEmRotaColi = new JButton("Em Rota de Colis\u00E3o");
 		btnEmRotaColi.setForeground(Color.BLACK);
 		btnEmRotaColi.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnEmRotaColi.setBackground(Color.ORANGE);
 		btnEmRotaColi.setBounds(20, 45, 154, 29);
 		panelFuncRRC.add(btnEmRotaColi);
-		
+
 		JLabel lblTempoMin = new JLabel("Tempo M\u00EDnimo:");
 		lblTempoMin.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblTempoMin.setBounds(20, 17, 84, 14);
 		panelFuncRRC.add(lblTempoMin);
-		
+
 		tfTempoMin = new JTextField();
 		tfTempoMin.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfTempoMin.setColumns(10);
 		tfTempoMin.setBounds(114, 14, 60, 20);
 		panelFuncRRC.add(tfTempoMin);
-		
+
 		JPanel panelDescricao = new JPanel();
 		panelDescricao.setLayout(null);
 		panelDescricao.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelDescricao.setBackground(Color.WHITE);
 		panelDescricao.setBounds(210, 586, 447, 133);
 		frame.getContentPane().add(panelDescricao);
-		
+
 		JLabel lblFoto = new JLabel("");
 		lblFoto.setBounds(0, 0, 447, 133);
 		panelDescricao.add(lblFoto);
-		lblFoto.setIcon(new ImageIcon(System.getProperty("user.dir")+"\\src\\img\\projeto.PNG"));
-		
+		lblFoto.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\src\\img\\projeto.PNG"));
+
 		JLabel lblRadar = new JLabel("Radar");
 		lblRadar.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblRadar.setBounds(563, 17, 52, 14);
 		frame.getContentPane().add(lblRadar);
-		
+
 		JLabel lblDataGrid = new JLabel("Data Grid");
 		lblDataGrid.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblDataGrid.setBounds(922, 17, 68, 14);
 		frame.getContentPane().add(lblDataGrid);
 	}
-	public void reescreverTabela() {
-		 if (!model.isEmpty()){
-	             model.limpar();          
-	        }
-		 
-		 if(!listPlanes.isEmpty()) {
 
-			 model.addListaDeUsuarios(listPlanes);
-			 }
-		 }
+	public void reescreverTabela() {
+		if (!model.isEmpty()) {
+			model.limpar();
+		}
+
+		if (!listPlanes.isEmpty()) {
+
+			model.addListaDeUsuarios(listPlanes);
+		}
+	}
+
 	public void zerarCampos() {
 		tfPosX1.setText("");
 		tfPosY1.setText("");
@@ -672,5 +657,5 @@ public class principal {
 		tfVelocidade.setText("");
 		tfDirecao.setText("");
 	}
-	
+
 }
