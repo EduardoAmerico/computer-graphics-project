@@ -89,11 +89,14 @@ public class principal {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Aircraft Controller!");
 		frame.getContentPane().setFont(new Font("Arial", Font.PLAIN, 12));
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 1146, 769);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
 
 		JPanel panelEntradaDados = new JPanel();
 		panelEntradaDados.setBorder(new LineBorder(new Color(0, 0, 0), 2));
