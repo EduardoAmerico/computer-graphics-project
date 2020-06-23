@@ -295,18 +295,6 @@ public class principal {
 						reescreverTabela();
 						panelRadar.transform(p, idSelecionado);
 
-						/*
-						 * for(int i = 0; i < listPlanes.size(); i++) { p = listPlanes.get(i);
-						 * if(p.getId() == idSelecionado) { System.out.println(p.getId());
-						 * System.out.println(p.getX()); System.out.println(p.getY());
-						 * System.out.println("*-*-*-*-*");
-						 * 
-						 * //mudar p.setX(10); p.setY(20);
-						 * 
-						 * listPlanes.set(i, p);
-						 * 
-						 * reescreverTabela(); //reescrever os desenhos tbm break; } }
-						 */
 
 					} else {
 						JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
@@ -377,21 +365,6 @@ public class principal {
 						listPlanes.set(idSelecionado, p);
 						reescreverTabela();
 						panelRadar.transform(p, idSelecionado);
-						/*
-						 * for(int i = 0; i < listPlanes.size(); i++) { p = listPlanes.get(i);
-						 * if(p.getId() == idSelecionado) { System.out.println("*-*-*-*-*");
-						 * System.out.println("Achou ó"); System.out.println(p.getId());
-						 * System.out.println(p.getX()); System.out.println(p.getY());
-						 * System.out.println("*-*-*-*-*");
-						 * 
-						 * //mudar p.setX(10); p.setY(20); //tem q calculçar de novo angulo e raio e
-						 * mandar tbm
-						 * 
-						 * listPlanes.set(i, p);
-						 * 
-						 * reescreverTabela(); //reescrever os desenhos tbm break; } }
-						 */
-
 					} else {
 						JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
 					}
@@ -448,30 +421,31 @@ public class principal {
 				if (idSelecionado != -1) {
 					Plane p = new Plane();
 					p = listPlanes.get(idSelecionado);
-					p.setX((p.getX() * Math.cos(Double.valueOf(tfAngulo4.getText())))
-							- (p.getY() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
-					p.setY((p.getY() * Math.cos(Double.valueOf(tfAngulo4.getText())))
-							+ (p.getX() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
+					double x1, y1, inputx, inputy, sin, cos;
+					// cos + sin angle
+					sin = Math.sin(Double.valueOf(tfAngulo4.getText()));
+					cos = Math.cos(Double.valueOf(tfAngulo4.getText()));
+					//inputs
+					inputx = Double.valueOf(tfPosX4.getText());
+					inputy = Double.valueOf(tfPosy4.getText());
+					// new x and y
+					x1 = p.getX() - inputx;
+					y1 = p.getY() - inputy;
+					//calc
+					p.setX((x1 * cos) - (y1 * sin));
+					p.setY((x1 * sin) + (y1 * cos));
+					
+					p.setX(p.getX()+x1);
+					p.setY(p.getY()+y1);
+					System.out.println("pontos y1"+ y1+ "x1" + x1);
+					//p.setX((p.getX() * var));
+					//p.setX((p.getX() * Math.cos(Double.valueOf(tfAngulo4.getText()))) - (p.getY() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
+					//p.setY((p.getY() * Math.cos(Double.valueOf(tfAngulo4.getText()))) + (p.getX() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
 					p.setAngle(Math.atan2(p.getX(), p.getY()));
 					p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
 					listPlanes.set(idSelecionado, p);
 					reescreverTabela();
 					panelRadar.transform(p, idSelecionado);
-					/*
-					 * for(int i = 0; i < listPlanes.size(); i++) { p = listPlanes.get(i);
-					 * if(p.getId() == idSelecionado) { System.out.println("*-*-*-*-*");
-					 * System.out.println("Achou ó"); System.out.println(p.getId());
-					 * System.out.println(p.getX()); System.out.println(p.getY());
-					 * System.out.println("*-*-*-*-*");
-					 * 
-					 * //mudar p.setX(10); p.setY(20); //tem q calculçar de novo angulo e raio e
-					 * mandar tbm
-					 * 
-					 * listPlanes.set(i, p);
-					 * 
-					 * reescreverTabela(); //reescrever os desenhos tbm break; } }
-					 */
-
 				} else {
 					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
 				}
