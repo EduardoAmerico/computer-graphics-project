@@ -1,11 +1,13 @@
 package View;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Plane {
 	private int id;
     private double x, y, angle, raio, direction, velocidade;
+    private Color cor;
     
     public Plane(int id, double x, double y,double raio, double angle, double direction, double velocidade) {
         super();
@@ -16,6 +18,7 @@ public class Plane {
         this.raio = raio;
         this.direction = direction;
         this.velocidade = velocidade;
+        this.cor = Color.BLACK;
     }
     
     public Plane() {
@@ -74,6 +77,14 @@ public class Plane {
 
 	public void setRaio(double raio) {
 		this.raio = raio;
+	}
+	
+	public void setColor(Color cor) {
+		this.cor = cor;
+	}
+	
+	public Color getColor() {
+		return cor;
 	}
 
 

@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,7 +13,6 @@ import javax.swing.JPanel;
 public class GridPanel extends JPanel{
 	private drawInGrid drawInGrid;
 	private ArrayList<Plane> listPlanes = new ArrayList<Plane>();
-
 
     public GridPanel() {
         drawInGrid = new drawInGrid();
@@ -36,6 +36,7 @@ public class GridPanel extends JPanel{
         drawInGrid.drawGrid(g2d, this);
         if(listPlanes.size()>0) {
         drawInGrid.drawArrow(this, g2d,listPlanes);
+
         }
         g2d.dispose();
     }
@@ -56,9 +57,15 @@ public class GridPanel extends JPanel{
     }
     
     
-    public void change() {
-    	listPlanes.get(0).setAngle(270);
-    	listPlanes.get(1).setAngle(180);
-    	listPlanes.get(0).setX(320);
+    public void mudacor (int id) {
+    	for(int i = 0;i < listPlanes.size(); i++) {
+    		if(listPlanes.get(i).getId() == id) {
+    			listPlanes.get(i).setColor(Color.ORANGE);
+    		}
+    		else {
+    			listPlanes.get(i).setColor(Color.BLACK);
+    		}
+    	}
+    	repaint(); 
     }
 }

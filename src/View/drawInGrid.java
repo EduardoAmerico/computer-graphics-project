@@ -12,7 +12,6 @@ import javax.swing.JComponent;
 public class drawInGrid implements GridShape {
 	//arrow head/
     private static final Polygon ARROW_HEAD = new Polygon();
-
     static {
     	ARROW_HEAD.addPoint(15, -15);
     	ARROW_HEAD.addPoint(-15, -15);
@@ -56,7 +55,8 @@ public class drawInGrid implements GridShape {
         // Obtém o AffineTransform original.
 		for(int i = 0; i< listPlanes.size();i++) {
         AffineTransform tx1 = g2d.getTransform();
-
+        g2d.setColor(listPlanes.get(i).getColor());
+        
         // Cria uma cópia do AffineTransform.
         AffineTransform tx2 = (AffineTransform) tx1.clone();
         
@@ -73,6 +73,7 @@ public class drawInGrid implements GridShape {
 		}
        
 	}
+
 
    
 

@@ -21,6 +21,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.border.LineBorder;
@@ -522,6 +524,17 @@ public class principal {
 		painelDataGrid.add(barraRolagemDataGrid);
 		painelDataGrid.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		frame.getContentPane().add(painelDataGrid);
+		
+		tabela.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount()==1) {
+					panelRadar.mudacor(idSelecionado);
+					panelRadar.repaint();
+					System.out.println("id selecionado>" + idSelecionado);
+					System.out.println("SELECIONA COR");
+				}
+			}
+		});
 
 		JLabel lblRelatorio = new JLabel("Relat\u00F3rio");
 		lblRelatorio.setFont(new Font("Arial", Font.PLAIN, 16));
