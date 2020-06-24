@@ -287,9 +287,9 @@ public class principal {
 					if (idSelecionado != -1) {
 						Plane p = new Plane();
 						p = listPlanes.get(idSelecionado);
-						p.setX(Double.valueOf(tfPosX2.getText()));
-						p.setY(Double.valueOf(tfPosY2.getText()));
-						p.setAngle(Math.atan2(p.getX(), p.getY()));
+						p.setX(p.getX() + Double.valueOf(tfPosX2.getText()));
+						p.setY(p.getY() + Double.valueOf(tfPosY2.getText()));
+						p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
 						p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
 						listPlanes.set(idSelecionado, p);
 						reescreverTabela();
@@ -358,9 +358,11 @@ public class principal {
 					if (idSelecionado != -1) {
 						Plane p = new Plane();
 						p = listPlanes.get(idSelecionado);
-						p.setX(p.getX() + ((p.getX() * Double.valueOf(tfPosX3.getText())) / 100));
-						p.setY(p.getY() + ((p.getY() * Double.valueOf(tfPosY3.getText())) / 100));
-						p.setAngle(Math.atan2(p.getX(), p.getY()));
+						p.setX(p.getX() * ( Double.valueOf(tfPosX3.getText()) / 100));
+						System.out.println("xxxxx "+ Double.valueOf(tfPosX3.getText()) / 100);
+						p.setY(p.getY() * ( Double.valueOf(tfPosY3.getText()) / 100));
+						System.out.println("yyyyy"+ Double.valueOf(tfPosY3.getText()) / 100);
+						p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
 						p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
 						listPlanes.set(idSelecionado, p);
 						reescreverTabela();
@@ -445,7 +447,7 @@ public class principal {
 					//p.setX((p.getX() * var));
 					//p.setX((p.getX() * Math.cos(Double.valueOf(tfAngulo4.getText()))) - (p.getY() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
 					//p.setY((p.getY() * Math.cos(Double.valueOf(tfAngulo4.getText()))) + (p.getX() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
-					p.setAngle(Math.atan2(p.getX(), p.getY()));
+					p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
 					p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
 					listPlanes.set(idSelecionado, p);
 					reescreverTabela();
@@ -660,6 +662,7 @@ public class principal {
 		model.limpar();
 		listPlanes.clear();
 		panelRadar.repaint();
+		id = 0;
 		
 		
 	}

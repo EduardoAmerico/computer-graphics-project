@@ -4,11 +4,13 @@ import javax.swing.table.AbstractTableModel;
 
 import View.Plane;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TableModel extends AbstractTableModel {
-
+	NumberFormat formatter = new DecimalFormat("#0.00");
 	private List<Plane> planes;
     private String[] colunas = new String[]{ "id", "X", "Y", "R", "A", "V", "D"};
     
@@ -97,22 +99,22 @@ public class TableModel extends AbstractTableModel {
 			valueObject = planeSelecionado.getId();
 			break;
        case 1:
-			valueObject = Math.round( planeSelecionado.getX());
+			valueObject = (formatter.format(planeSelecionado.getX()));
 			break;
 		case 2:
-			valueObject = Math.round(planeSelecionado.getY());
+			valueObject = (formatter.format(planeSelecionado.getY()));
 			break;
 		case 3:
-			valueObject = Math.round(planeSelecionado.getRaio());
+			valueObject = (formatter.format(planeSelecionado.getRaio()));
 			break;
 		case 4:
-			valueObject = Math.round(planeSelecionado.getAngle());
+			valueObject = (formatter.format(planeSelecionado.getAngle()));
 			break;
 		case 5:
-			valueObject = Math.round(planeSelecionado.getVelocidade());
+			valueObject = (formatter.format(planeSelecionado.getVelocidade()));
 			break;
 		case 6:
-			valueObject = Math.round(planeSelecionado.getDirection());
+			valueObject = (formatter.format(planeSelecionado.getDirection()));
 			break;
 		default:
 			System.err.println("Índice inválido para propriedade do bean Air.class");
