@@ -423,8 +423,12 @@ public class principal {
 					p = listPlanes.get(idSelecionado);
 					double x1, y1, inputx, inputy, sin, cos;
 					// cos + sin angle
-					sin = Math.sin(Double.valueOf(tfAngulo4.getText()));
-					cos = Math.cos(Double.valueOf(tfAngulo4.getText()));
+					sin = Math.sin(Double.valueOf(tfAngulo4.getText())/(180/Math.PI));
+				//	System.out.println("seno:");
+				//	System.out.println(sin);
+					cos = Math.cos(Double.valueOf(tfAngulo4.getText())/(180/Math.PI));
+				//	System.out.println("coseno:");
+				//	System.out.println(cos);
 					//inputs
 					inputx = Double.valueOf(tfPosX4.getText());
 					inputy = Double.valueOf(tfPosy4.getText());
@@ -433,11 +437,11 @@ public class principal {
 					y1 = p.getY() - inputy;
 					//calc
 					p.setX((x1 * cos) - (y1 * sin));
-					p.setY((x1 * sin) + (y1 * cos));
+					p.setY((y1 * cos) + (x1 * sin));
 					
-					p.setX(p.getX()+x1);
-					p.setY(p.getY()+y1);
-					System.out.println("pontos y1"+ y1+ "x1" + x1);
+					p.setX(p.getX()+inputx);
+					p.setY(p.getY()+inputy);
+					//System.out.println("pontos y1"+ y1+ "x1" + x1);
 					//p.setX((p.getX() * var));
 					//p.setX((p.getX() * Math.cos(Double.valueOf(tfAngulo4.getText()))) - (p.getY() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
 					//p.setY((p.getY() * Math.cos(Double.valueOf(tfAngulo4.getText()))) + (p.getX() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
