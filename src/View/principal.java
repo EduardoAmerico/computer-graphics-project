@@ -92,7 +92,7 @@ public class principal {
 		frame.setTitle("Aircraft Controller!");
 		frame.getContentPane().setFont(new Font("Arial", Font.PLAIN, 12));
 		frame.getContentPane().setBackground(Color.WHITE);
-		frame.setBounds(100, 100, 1146, 769);
+		frame.setBounds(100, 100, 1205, 769);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
@@ -172,7 +172,7 @@ public class principal {
 							x = Double.valueOf(tfPosX1.getText());
 							y = Double.valueOf(tfPosY1.getText());
 							// calc angulo
-							angle = Math.atan2(y, x);
+							angle = Math.toDegrees(Math.atan2(y, x));
 							System.out.println("angulo>>>>" + Math.toDegrees(angle));
 							// calc raio
 							raio = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
@@ -488,45 +488,16 @@ public class principal {
 
 		model = new TableModel();
 
-		JPanel painelDataGrid = new JPanel();
-		painelDataGrid.setBackground(Color.WHITE);
-		painelDataGrid.setLayout(new GridLayout(1, 1));
-		painelDataGrid.setBounds(796, 42, 324, 318);
-		JTable tabela = new JTable(model);
-		tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent event) {
-
-				if (tabela.getSelectedRow() != -1) {
-					idSelecionado = (int) tabela.getValueAt(tabela.getSelectedRow(), 0);
-				}
-			}
-		});
-		JScrollPane barraRolagemDataGrid = new JScrollPane(tabela);
-		painelDataGrid.add(barraRolagemDataGrid);
-		painelDataGrid.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		frame.getContentPane().add(painelDataGrid);
-		
-		tabela.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if(e.getClickCount()==1) {
-					panelRadar.mudacor(idSelecionado);
-					panelRadar.repaint();
-					System.out.println("id selecionado>" + idSelecionado);
-					System.out.println("SELECIONA COR");
-				}
-			}
-		});
-
 		JLabel lblRelatorio = new JLabel("Relat\u00F3rio");
 		lblRelatorio.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblRelatorio.setBounds(922, 371, 65, 14);
+		lblRelatorio.setBounds(953, 418, 65, 14);
 		frame.getContentPane().add(lblRelatorio);
 
 		JPanel panelRelatorio = new JPanel();
 		panelRelatorio.setLayout(null);
 		panelRelatorio.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelRelatorio.setBackground(Color.WHITE);
-		panelRelatorio.setBounds(796, 399, 324, 247);
+		panelRelatorio.setBounds(796, 443, 377, 247);
 		frame.getContentPane().add(panelRelatorio);
 
 		JLabel lblFunesDeRastreamento = new JLabel("Fun\u00E7\u00F5es de Rastreamento");
@@ -628,8 +599,50 @@ public class principal {
 
 		JLabel lblDataGrid = new JLabel("Data Grid");
 		lblDataGrid.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblDataGrid.setBounds(922, 17, 68, 14);
+		lblDataGrid.setBounds(953, 17, 68, 14);
 		frame.getContentPane().add(lblDataGrid);
+		JTable tabela = new JTable(model);
+		tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+
+				if (tabela.getSelectedRow() != -1) {
+					idSelecionado = (int) tabela.getValueAt(tabela.getSelectedRow(), 0);
+				}
+			}
+		});
+		JScrollPane barraRolagemDataGrid = new JScrollPane(tabela);
+		barraRolagemDataGrid.setBounds(800, 72, 373, 314);
+		frame.getContentPane().add(barraRolagemDataGrid);
+		
+				JPanel painelDataGrid = new JPanel();
+				barraRolagemDataGrid.setColumnHeaderView(painelDataGrid);
+				painelDataGrid.setBackground(Color.WHITE);
+				painelDataGrid.setLayout(new GridLayout(1, 1));
+				painelDataGrid.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+				
+				JButton btnZerarTabela = new JButton("Zerar Tabela");
+				btnZerarTabela.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+								zerarTabela();
+					}
+				});
+				btnZerarTabela.setForeground(Color.BLACK);
+				btnZerarTabela.setFont(new Font("Arial", Font.PLAIN, 12));
+				btnZerarTabela.setBackground(Color.ORANGE);
+				btnZerarTabela.setBounds(796, 42, 106, 23);
+				frame.getContentPane().add(btnZerarTabela);
+		
+		tabela.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount()==1) {
+					panelRadar.mudacor(idSelecionado);
+					panelRadar.repaint();
+					System.out.println("id selecionado>" + idSelecionado);
+					System.out.println("SELECIONA COR");
+				}
+			}
+		});
 	}
 
 	public void reescreverTabela() {
@@ -639,9 +652,18 @@ public class principal {
 
 		if (!listPlanes.isEmpty()) {
 
-			model.addListaDeUsuarios(listPlanes);
+			model.addListaDePlanes(listPlanes);
 		}
 	}
+	public void zerarTabela() {
+		
+		model.limpar();
+		listPlanes.clear();
+		panelRadar.repaint();
+		
+		
+	}
+
 
 	public void zerarCampos() {
 		tfPosX1.setText("");
@@ -651,5 +673,4 @@ public class principal {
 		tfVelocidade.setText("");
 		tfDirecao.setText("");
 	}
-
 }

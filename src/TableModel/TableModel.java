@@ -97,22 +97,22 @@ public class TableModel extends AbstractTableModel {
 			valueObject = planeSelecionado.getId();
 			break;
        case 1:
-			valueObject = planeSelecionado.getX();
+			valueObject = Math.round( planeSelecionado.getX());
 			break;
 		case 2:
-			valueObject = planeSelecionado.getY();
+			valueObject = Math.round(planeSelecionado.getY());
 			break;
 		case 3:
-			valueObject = planeSelecionado.getRaio();
+			valueObject = Math.round(planeSelecionado.getRaio());
 			break;
 		case 4:
-			valueObject = Math.toDegrees(planeSelecionado.getAngle());
+			valueObject = Math.round(planeSelecionado.getAngle());
 			break;
 		case 5:
-			valueObject = planeSelecionado.getVelocidade();
+			valueObject = Math.round(planeSelecionado.getVelocidade());
 			break;
 		case 6:
-			valueObject = planeSelecionado.getDirection();
+			valueObject = Math.round(planeSelecionado.getDirection());
 			break;
 		default:
 			System.err.println("Índice inválido para propriedade do bean Air.class");
@@ -148,7 +148,7 @@ public class TableModel extends AbstractTableModel {
    }  
     
     
-   public void addListaDeUsuarios(List<Plane> novosUsuarios) {  
+   public void addListaDePlanes(List<Plane> novosUsuarios) {  
         
        int tamanhoAntigo = getRowCount();      
        planes.addAll(novosUsuarios);    
