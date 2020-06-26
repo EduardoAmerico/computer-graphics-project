@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.ListResourceBundle;
 
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -295,7 +296,6 @@ public class principal {
 						reescreverTabela();
 						panelRadar.transform(p, idSelecionado);
 
-
 					} else {
 						JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
 					}
@@ -358,10 +358,10 @@ public class principal {
 					if (idSelecionado != -1) {
 						Plane p = new Plane();
 						p = listPlanes.get(idSelecionado);
-						p.setX(p.getX() * ( Double.valueOf(tfPosX3.getText()) / 100));
-						System.out.println("xxxxx "+ Double.valueOf(tfPosX3.getText()) / 100);
-						p.setY(p.getY() * ( Double.valueOf(tfPosY3.getText()) / 100));
-						System.out.println("yyyyy"+ Double.valueOf(tfPosY3.getText()) / 100);
+						p.setX(p.getX() * (Double.valueOf(tfPosX3.getText()) / 100));
+						System.out.println("xxxxx " + Double.valueOf(tfPosX3.getText()) / 100);
+						p.setY(p.getY() * (Double.valueOf(tfPosY3.getText()) / 100));
+						System.out.println("yyyyy" + Double.valueOf(tfPosY3.getText()) / 100);
 						p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
 						p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
 						listPlanes.set(idSelecionado, p);
@@ -419,45 +419,47 @@ public class principal {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				System.out.println(idSelecionado);
-				if(!tfPosX4.getText().isEmpty() && !tfPosy4.getText().isEmpty() && !tfAngulo4.getText().isEmpty()) {
-				if (idSelecionado != -1) {
-					Plane p = new Plane();
-					p = listPlanes.get(idSelecionado);
-					double x1, y1, inputx, inputy, sin, cos;
-					// cos + sin angle
-					sin = Math.sin(Double.valueOf(tfAngulo4.getText())/(180/Math.PI));
-				//	System.out.println("seno:");
-				//	System.out.println(sin);
-					cos = Math.cos(Double.valueOf(tfAngulo4.getText())/(180/Math.PI));
-				//	System.out.println("coseno:");
-				//	System.out.println(cos);
-					//inputs
-					inputx = Double.valueOf(tfPosX4.getText());
-					inputy = Double.valueOf(tfPosy4.getText());
-					// new x and y
-					x1 = p.getX() - inputx;
-					y1 = p.getY() - inputy;
-					//calc
-					p.setX((x1 * cos) - (y1 * sin));
-					p.setY((y1 * cos) + (x1 * sin));
-					
-					p.setX(p.getX()+inputx);
-					p.setY(p.getY()+inputy);
-					//System.out.println("pontos y1"+ y1+ "x1" + x1);
-					//p.setX((p.getX() * var));
-					//p.setX((p.getX() * Math.cos(Double.valueOf(tfAngulo4.getText()))) - (p.getY() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
-					//p.setY((p.getY() * Math.cos(Double.valueOf(tfAngulo4.getText()))) + (p.getX() * Math.sin(Double.valueOf(tfAngulo4.getText()))));
-					p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
-					p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
-					listPlanes.set(idSelecionado, p);
-					reescreverTabela();
-					panelRadar.transform(p, idSelecionado);
+				if (!tfPosX4.getText().isEmpty() && !tfPosy4.getText().isEmpty() && !tfAngulo4.getText().isEmpty()) {
+					if (idSelecionado != -1) {
+						Plane p = new Plane();
+						p = listPlanes.get(idSelecionado);
+						double x1, y1, inputx, inputy, sin, cos;
+						// cos + sin angle
+						sin = Math.sin(Double.valueOf(tfAngulo4.getText()) / (180 / Math.PI));
+						// System.out.println("seno:");
+						// System.out.println(sin);
+						cos = Math.cos(Double.valueOf(tfAngulo4.getText()) / (180 / Math.PI));
+						// System.out.println("coseno:");
+						// System.out.println(cos);
+						// inputs
+						inputx = Double.valueOf(tfPosX4.getText());
+						inputy = Double.valueOf(tfPosy4.getText());
+						// new x and y
+						x1 = p.getX() - inputx;
+						y1 = p.getY() - inputy;
+						// calc
+						p.setX((x1 * cos) - (y1 * sin));
+						p.setY((y1 * cos) + (x1 * sin));
+
+						p.setX(p.getX() + inputx);
+						p.setY(p.getY() + inputy);
+						// System.out.println("pontos y1"+ y1+ "x1" + x1);
+						// p.setX((p.getX() * var));
+						// p.setX((p.getX() * Math.cos(Double.valueOf(tfAngulo4.getText()))) - (p.getY()
+						// * Math.sin(Double.valueOf(tfAngulo4.getText()))));
+						// p.setY((p.getY() * Math.cos(Double.valueOf(tfAngulo4.getText()))) + (p.getX()
+						// * Math.sin(Double.valueOf(tfAngulo4.getText()))));
+						p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
+						p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
+						listPlanes.set(idSelecionado, p);
+						reescreverTabela();
+						panelRadar.transform(p, idSelecionado);
+					} else {
+						JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
+					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
+					JOptionPane.showMessageDialog(null, "Preencha os campos!");
 				}
-			} else {
-				JOptionPane.showMessageDialog(null, "Preencha os campos!");
-			}
 //				panelRadar.change();
 //				panelRadar.repaint();
 			}
@@ -615,29 +617,49 @@ public class principal {
 		JScrollPane barraRolagemDataGrid = new JScrollPane(tabela);
 		barraRolagemDataGrid.setBounds(800, 72, 373, 314);
 		frame.getContentPane().add(barraRolagemDataGrid);
-		
-				JPanel painelDataGrid = new JPanel();
-				barraRolagemDataGrid.setColumnHeaderView(painelDataGrid);
-				painelDataGrid.setBackground(Color.WHITE);
-				painelDataGrid.setLayout(new GridLayout(1, 1));
-				painelDataGrid.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-				
-				JButton btnZerarTabela = new JButton("Zerar Tabela");
-				btnZerarTabela.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-								zerarTabela();
-					}
-				});
-				btnZerarTabela.setForeground(Color.BLACK);
-				btnZerarTabela.setFont(new Font("Arial", Font.PLAIN, 12));
-				btnZerarTabela.setBackground(Color.ORANGE);
-				btnZerarTabela.setBounds(796, 42, 106, 23);
-				frame.getContentPane().add(btnZerarTabela);
-		
+
+		JPanel painelDataGrid = new JPanel();
+		barraRolagemDataGrid.setColumnHeaderView(painelDataGrid);
+		painelDataGrid.setBackground(Color.WHITE);
+		painelDataGrid.setLayout(new GridLayout(1, 1));
+		painelDataGrid.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+
+		JButton btnZerarTabela = new JButton("Zerar Tabela");
+		btnZerarTabela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				zerarTabela();
+			}
+		});
+		btnZerarTabela.setForeground(Color.BLACK);
+		btnZerarTabela.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnZerarTabela.setBackground(Color.ORANGE);
+		btnZerarTabela.setBounds(796, 42, 106, 23);
+		frame.getContentPane().add(btnZerarTabela);
+
+		JButton btnDeletar = new JButton("Deletar");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listPlanes.remove(idSelecionado);
+				Plane p = new Plane();
+				for (int i = 0; i < listPlanes.size(); i++) {
+					p = listPlanes.get(i);
+					p.setId(i);
+				}
+				model.limpar();
+				model.addListaDePlanes(listPlanes);
+				panelRadar.repaint();
+			}
+		});
+		btnDeletar.setForeground(Color.BLACK);
+		btnDeletar.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnDeletar.setBackground(Color.ORANGE);
+		btnDeletar.setBounds(912, 42, 106, 23);
+		frame.getContentPane().add(btnDeletar);
+
 		tabela.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if(e.getClickCount()==1) {
+				if (e.getClickCount() == 1) {
 					panelRadar.mudacor(idSelecionado);
 					panelRadar.repaint();
 					System.out.println("id selecionado>" + idSelecionado);
@@ -657,16 +679,15 @@ public class principal {
 			model.addListaDePlanes(listPlanes);
 		}
 	}
+
 	public void zerarTabela() {
-		
+
 		model.limpar();
 		listPlanes.clear();
 		panelRadar.repaint();
 		id = 0;
-		
-		
-	}
 
+	}
 
 	public void zerarCampos() {
 		tfPosX1.setText("");
