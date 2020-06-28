@@ -11,7 +11,7 @@ import javax.swing.JComponent;
 
 public class drawInGrid implements GridShape {
 	//arrow head/
-    private static final Polygon ARROW_HEAD = new Polygon();
+	private static final Polygon ARROW_HEAD = new Polygon();
     static {
     	ARROW_HEAD.addPoint(10, -10);
     	ARROW_HEAD.addPoint(-10, -10);
