@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
 import java.awt.Color;
@@ -497,7 +498,7 @@ public class principal {
 		lblRelatorio.setBounds(953, 418, 65, 14);
 		frame.getContentPane().add(lblRelatorio);
 
-		JPanel panelRelatorio = new JPanel();
+		JTextPane panelRelatorio = new JTextPane();
 		panelRelatorio.setLayout(null);
 		panelRelatorio.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panelRelatorio.setBackground(Color.WHITE);
@@ -520,6 +521,25 @@ public class principal {
 		btnAviProxA.setForeground(Color.BLACK);
 		btnAviProxA.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnAviProxA.setBackground(Color.ORANGE);
+		btnAviProxA.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int j = 0;
+				panelRelatorio.replaceSelection("Aviões com distancia minima de " + tfDistanciaMinima.getText() + " com o aeroporto: \n");
+				for (int i = 0; i < listPlanes.size(); i++) {
+					if(listPlanes.get(i).getRaio() <= Double.valueOf(tfDistanciaMinima.getText())) {
+						panelRelatorio.replaceSelection("Avião com id: " + String.valueOf(listPlanes.get(i).getId() + "\n"));
+						System.out.println("é menor");
+						j++;
+					}
+				}
+				if(j == 0) {
+					panelRelatorio.replaceSelection("Nenhum avião com uma distancia de "+ tfDistanciaMinima.getText() + " foi encontrado proximo ao aeroporto!");
+				}
+				panelRelatorio.replaceSelection("\n\n");
+			}
+		});
 		btnAviProxA.setBounds(20, 45, 214, 29);
 		panelFuncRAPA.add(btnAviProxA);
 
