@@ -36,7 +36,6 @@ public class GridPanel extends JPanel{
         drawInGrid.drawGrid(g2d, this);
         if(listPlanes.size()>0) {
         drawInGrid.drawArrow(this, g2d,listPlanes);
-
         }
         g2d.dispose();
     }

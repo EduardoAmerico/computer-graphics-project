@@ -522,22 +522,29 @@ public class principal {
 		btnAviProxA.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnAviProxA.setBackground(Color.ORANGE);
 		btnAviProxA.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int j = 0;
-				panelRelatorio.replaceSelection("Aviões com distancia minima de " + tfDistanciaMinima.getText() + " com o aeroporto: \n");
-				for (int i = 0; i < listPlanes.size(); i++) {
-					if(listPlanes.get(i).getRaio() <= Double.valueOf(tfDistanciaMinima.getText())) {
-						panelRelatorio.replaceSelection("Avião com id: " + String.valueOf(listPlanes.get(i).getId() + "\n"));
-						System.out.println("é menor");
-						j++;
+				if (!tfDistanciaMinima.getText().isEmpty()) {
+					panelRelatorio.replaceSelection(
+							"Aviões com distancia minima de " + tfDistanciaMinima.getText() + " com o aeroporto: \n");
+					for (int i = 0; i < listPlanes.size(); i++) {
+						if (listPlanes.get(i).getRaio() <= Double.valueOf(tfDistanciaMinima.getText())) {
+							panelRelatorio.replaceSelection(
+									"Avião com id: " + String.valueOf(listPlanes.get(i).getId() + "\n"));
+							System.out.println("é menor");
+							j++;
+						}
 					}
+					if (j == 0) {
+						panelRelatorio.replaceSelection("Nenhum avião com uma distancia de "
+								+ tfDistanciaMinima.getText() + " foi encontrado proximo ao aeroporto!");
+					}
+					panelRelatorio.replaceSelection("\n\n");
+				} else {
+					JOptionPane.showMessageDialog(null, "Informe a distância minima!");
 				}
-				if(j == 0) {
-					panelRelatorio.replaceSelection("Nenhum avião com uma distancia de "+ tfDistanciaMinima.getText() + " foi encontrado proximo ao aeroporto!");
-				}
-				panelRelatorio.replaceSelection("\n\n");
 			}
 		});
 		btnAviProxA.setBounds(20, 45, 214, 29);
@@ -565,6 +572,45 @@ public class principal {
 		btnAviProx.setForeground(Color.BLACK);
 		btnAviProx.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnAviProx.setBackground(Color.ORANGE);
+		btnAviProx.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double x1, x2;
+				double y1, y2;
+				int k = 0;
+				if (tfDistanciaMinima2.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Informe a distância minima!");
+				} else {
+					panelRelatorio.replaceSelection("Aviões com distancia minima de " + tfDistanciaMinima2.getText()
+							+ " com outro avião\n");
+					for (int i = 0; i < listPlanes.size(); i++) {
+						x1 = listPlanes.get(i).getX();
+						y1 = listPlanes.get(i).getY();
+						for (int j = 0; j < listPlanes.size(); j++) {
+							if (i != j && j>i) {
+								System.out.println("testou o avião " +i+ " com o avião " +j);
+								double dist;
+								x2 = listPlanes.get(j).getX();
+								y2 = listPlanes.get(j).getY();
+								// calc dist
+								dist = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
+								if (Double.valueOf(tfDistanciaMinima2.getText()) <= dist) {
+									panelRelatorio.replaceSelection(
+											"Avião com id: " + String.valueOf(listPlanes.get(i).getId() + " está proximo ao avião com id: " + listPlanes.get(j).getId() + "\n" ));
+									k++;
+								}
+							}
+						}
+					}
+					if (k == 0) {
+						panelRelatorio
+								.replaceSelection("Nenhum avião com uma distancia de " + tfDistanciaMinima2.getText()
+										+ "proximo a outro avião foi encontrado!\n");
+					}
+				}
+			}
+		});
 		btnAviProx.setBounds(20, 45, 167, 29);
 		panelFuncRAP.add(btnAviProx);
 
