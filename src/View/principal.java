@@ -60,6 +60,7 @@ public class principal {
 	private Plane plane;
 	private int id = 0;
 	private int idSelecionado = -1;
+	private int ids[]= null;
 
 	/**
 	 * Launch the application.
@@ -673,13 +674,22 @@ public class principal {
 		frame.getContentPane().add(lblDataGrid);
 		JTable tabela = new JTable(model);
 		tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent event) {
+            public void valueChanged(ListSelectionEvent event) {
+                System.out.println("////////");
+                ids = tabela.getSelectedRows();
+                System.out.println("ids selecionados");
+                for(int i = 0; i < ids.length; i++) {
+                System.out.println(ids[i]);
+                }
+                System.out.println("ids selecionados fim");
+                panelRadar.mudacor(ids);
+                System.out.println("//////");
+                //if (tabela.getSelectedRows() != -1) {
+                //idSelecionado = (int) tabela.getValueAt(tabela.getSelectedRow(), 0);
+                //}
 
-				if (tabela.getSelectedRow() != -1) {
-					idSelecionado = (int) tabela.getValueAt(tabela.getSelectedRow(), 0);
-				}
-			}
-		});
+            }
+        });
 		JScrollPane barraRolagemDataGrid = new JScrollPane(tabela);
 		barraRolagemDataGrid.setBounds(800, 72, 373, 314);
 		frame.getContentPane().add(barraRolagemDataGrid);
@@ -726,10 +736,10 @@ public class principal {
 		tabela.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 1) {
-					panelRadar.mudacor(idSelecionado);
-					panelRadar.repaint();
-					System.out.println("id selecionado>" + idSelecionado);
-					System.out.println("SELECIONA COR");
+					//panelRadar.mudacor(ids);
+					//panelRadar.repaint();
+					//System.out.println("id selecionado>" + idSelecionado);
+					//System.out.println("SELECIONA COR");
 				}
 			}
 		});
