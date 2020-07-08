@@ -67,7 +67,7 @@ public class drawInGrid implements GridShape {
         // Desenha a ponta com o AffineTransform transladado e rotacionado.
         g2d.setTransform(tx2);
         g2d.fill(ARROW_HEAD);
-        System.out.println(i);
+       // System.out.println(i);
         // Restaura o AffineTransform original.
         g2d.setTransform(tx1);
 		}
