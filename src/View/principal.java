@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ListResourceBundle;
 
 import javax.swing.border.LineBorder;
@@ -59,8 +60,9 @@ public class principal {
 	private ArrayList<Plane> listPlanes = new ArrayList<Plane>();
 	private Plane plane;
 	private int id = 0;
-	private int idSelecionado = -1;
-	private int ids[]= null;
+	private int idSelecionado = -100;
+	private int ids[] = null;
+	private int auxIds[] = null;
 
 	/**
 	 * Launch the application.
@@ -72,7 +74,7 @@ public class principal {
 					principal window = new principal();
 					window.frame.setVisible(true);
 					Double angle = new Double(0);
-					System.out.println(angle = Math.atan2(10, 10));
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -155,58 +157,6 @@ public class principal {
 		panelEntradaDados.add(tfPosX1);
 		tfPosX1.setColumns(10);
 
-		JButton btnInserir = new JButton("Inserir");
-		btnInserir.setForeground(Color.BLACK);
-		btnInserir.setBackground(Color.ORANGE);
-		btnInserir.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnInserir.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				double x, y, angle, raio, velocidade, direction;
-
-				if (!tfPosX1.getText().isEmpty() && !tfPosY1.getText().isEmpty()
-						|| !tfRaio1.getText().isEmpty() && !tfAngulo1.getText().isEmpty()) {
-					if (!tfVelocidade.getText().isEmpty() && !tfDirecao.getText().isEmpty()) {
-						velocidade = Double.valueOf(tfVelocidade.getText());
-						direction = Double.valueOf(tfDirecao.getText());
-						if (tfAngulo1.getText().isEmpty() && tfRaio1.getText().isEmpty()) {
-							x = Double.valueOf(tfPosX1.getText());
-							y = Double.valueOf(tfPosY1.getText());
-							// calc angulo
-							angle = Math.toDegrees(Math.atan2(y, x));
-							System.out.println("angulo>>>>" + Math.toDegrees(angle));
-							// calc raio
-							raio = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
-							System.out.println("Raio>>>>" + raio);
-						} else {
-							angle = Double.valueOf(tfAngulo1.getText());
-							raio = Double.valueOf(tfRaio1.getText());
-							// calc x
-							x = raio * Math.cos(Math.toRadians(angle));
-							System.out.println("x>>>>" + x);
-							// calc y
-							y = raio * Math.sin(Math.toRadians(angle));
-							System.out.println("y>>>>" + y);
-						}
-						listPlanes.add(new Plane(id, x, y, raio, angle, direction, velocidade));
-						reescreverTabela();
-						panelRadar.setList(listPlanes);
-						panelRadar.repaint();
-						id++;
-						zerarCampos();
-					} else {
-						JOptionPane.showMessageDialog(null, "Preencha os campos de Velocidade e Direção");
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "Preencha os campos de X e Y ou Angulo e Raio!");
-				}
-			}
-		});
-		btnInserir.setBounds(224, 99, 90, 32);
-		panelEntradaDados.add(btnInserir);
-
 		tfRaio1 = new JTextField();
 		tfRaio1.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfRaio1.setColumns(10);
@@ -276,41 +226,6 @@ public class principal {
 		tfPosY2.setBounds(108, 17, 35, 20);
 		panelFuncTT.add(tfPosY2);
 
-		JButton btnTranslandar = new JButton("Translandar");
-		btnTranslandar.setForeground(Color.BLACK);
-		btnTranslandar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnTranslandar.setBackground(Color.ORANGE);
-		btnTranslandar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("selected id> " + idSelecionado);
-				if (!tfPosX2.getText().isEmpty() && !tfPosY2.getText().isEmpty()) {
-					if (idSelecionado != -1) {
-						Plane p = new Plane();
-						p = listPlanes.get(idSelecionado);
-						p.setX(p.getX() + Double.valueOf(tfPosX2.getText()));
-						p.setY(p.getY() + Double.valueOf(tfPosY2.getText()));
-						p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
-						p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
-						listPlanes.set(idSelecionado, p);
-						reescreverTabela();
-						panelRadar.transform(p, idSelecionado);
-
-					} else {
-						JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "Preencha os campos!");
-				}
-//				panelRadar.change();
-//				panelRadar.repaint();
-			}
-		});
-		btnTranslandar.setBounds(20, 45, 123, 29);
-		panelFuncTT.add(btnTranslandar);
-
 		JLabel lblFunoDeTransformao = new JLabel("Fun\u00E7\u00E3o de Transforma\u00E7\u00E3o");
 		lblFunoDeTransformao.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblFunoDeTransformao.setBounds(107, 203, 192, 14);
@@ -345,42 +260,6 @@ public class principal {
 		tfPosY3.setBounds(108, 17, 35, 20);
 		panelFuncTE.add(tfPosY3);
 
-		JButton btnEscalonar = new JButton("Escalonar");
-		btnEscalonar.setForeground(Color.BLACK);
-		btnEscalonar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnEscalonar.setBackground(Color.ORANGE);
-		btnEscalonar.setBounds(20, 45, 123, 29);
-		btnEscalonar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println(idSelecionado);
-				if (!tfPosX3.getText().isEmpty() && !tfPosY3.getText().isEmpty()) {
-					if (idSelecionado != -1) {
-						Plane p = new Plane();
-						p = listPlanes.get(idSelecionado);
-						p.setX(p.getX() * (Double.valueOf(tfPosX3.getText()) / 100));
-						System.out.println("xxxxx " + Double.valueOf(tfPosX3.getText()) / 100);
-						p.setY(p.getY() * (Double.valueOf(tfPosY3.getText()) / 100));
-						System.out.println("yyyyy" + Double.valueOf(tfPosY3.getText()) / 100);
-						p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
-						p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
-						listPlanes.set(idSelecionado, p);
-						reescreverTabela();
-						panelRadar.transform(p, idSelecionado);
-					} else {
-						JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "Preencha os campos!");
-				}
-//				panelRadar.change();
-//				panelRadar.repaint();
-			}
-		});
-		panelFuncTE.add(btnEscalonar);
-
 		JPanel panelFuncTR = new JPanel();
 		panelFuncTR.setLayout(null);
 		panelFuncTR.setBorder(new LineBorder(new Color(0, 0, 0), 2));
@@ -409,65 +288,6 @@ public class principal {
 		tfPosy4.setColumns(10);
 		tfPosy4.setBounds(259, 45, 35, 20);
 		panelFuncTR.add(tfPosy4);
-
-		JButton btnRotacionar = new JButton("Rotacionar");
-		btnRotacionar.setForeground(Color.BLACK);
-		btnRotacionar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnRotacionar.setBackground(Color.ORANGE);
-		btnRotacionar.setBounds(20, 45, 123, 29);
-		btnRotacionar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println(idSelecionado);
-				if (!tfPosX4.getText().isEmpty() && !tfPosy4.getText().isEmpty() && !tfAngulo4.getText().isEmpty()) {
-					if (idSelecionado != -1) {
-						Plane p = new Plane();
-						p = listPlanes.get(idSelecionado);
-						double x1, y1, inputx, inputy, sin, cos;
-						// cos + sin angle
-						sin = Math.sin(Double.valueOf(tfAngulo4.getText()) / (180 / Math.PI));
-						// System.out.println("seno:");
-						// System.out.println(sin);
-						cos = Math.cos(Double.valueOf(tfAngulo4.getText()) / (180 / Math.PI));
-						// System.out.println("coseno:");
-						// System.out.println(cos);
-						// inputs
-						inputx = Double.valueOf(tfPosX4.getText());
-						inputy = Double.valueOf(tfPosy4.getText());
-						// new x and y
-						x1 = p.getX() - inputx;
-						y1 = p.getY() - inputy;
-						// calc
-						p.setX((x1 * cos) - (y1 * sin));
-						p.setY((y1 * cos) + (x1 * sin));
-
-						p.setX(p.getX() + inputx);
-						p.setY(p.getY() + inputy);
-						// System.out.println("pontos y1"+ y1+ "x1" + x1);
-						// p.setX((p.getX() * var));
-						// p.setX((p.getX() * Math.cos(Double.valueOf(tfAngulo4.getText()))) - (p.getY()
-						// * Math.sin(Double.valueOf(tfAngulo4.getText()))));
-						// p.setY((p.getY() * Math.cos(Double.valueOf(tfAngulo4.getText()))) + (p.getX()
-						// * Math.sin(Double.valueOf(tfAngulo4.getText()))));
-						p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
-						p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
-						listPlanes.set(idSelecionado, p);
-						reescreverTabela();
-						panelRadar.transform(p, idSelecionado);
-					} else {
-						JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "Preencha os campos!");
-				}
-//				panelRadar.change();
-//				panelRadar.repaint();
-			}
-		});
-
-		panelFuncTR.add(btnRotacionar);
 
 		JLabel lblAngulo4 = new JLabel("\u00C2ngulo:");
 		lblAngulo4.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -501,10 +321,12 @@ public class principal {
 
 		JTextPane panelRelatorio = new JTextPane();
 		panelRelatorio.setLayout(null);
-		panelRelatorio.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panelRelatorio.setBackground(Color.WHITE);
-		panelRelatorio.setBounds(796, 443, 377, 247);
-		frame.getContentPane().add(panelRelatorio);
+
+		JScrollPane barraRolagemRelatorio = new JScrollPane(panelRelatorio);
+		barraRolagemRelatorio.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		barraRolagemRelatorio.setBackground(Color.WHITE);
+		barraRolagemRelatorio.setBounds(796, 443, 377, 247);
+		frame.getContentPane().add(barraRolagemRelatorio);
 
 		JLabel lblFunesDeRastreamento = new JLabel("Fun\u00E7\u00F5es de Rastreamento");
 		lblFunesDeRastreamento.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -583,31 +405,31 @@ public class principal {
 				if (tfDistanciaMinima2.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Informe a distância minima!");
 				} else {
-					panelRelatorio.replaceSelection("Aviões com distancia minima de " + tfDistanciaMinima2.getText()
-							+ " com outro avião\n");
+					panelRelatorio.replaceSelection(
+							"Aviões com distancia minima de " + tfDistanciaMinima2.getText() + " com outro avião\n");
 					for (int i = 0; i < listPlanes.size(); i++) {
 						x1 = listPlanes.get(i).getX();
 						y1 = listPlanes.get(i).getY();
 						for (int j = 0; j < listPlanes.size(); j++) {
-							if (i != j && j>i) {
-								System.out.println("testou o avião " +i+ " com o avião " +j);
+							if (i != j && j > i) {
+								System.out.println("testou o avião " + i + " com o avião " + j);
 								double dist;
 								x2 = listPlanes.get(j).getX();
 								y2 = listPlanes.get(j).getY();
 								// calc dist
 								dist = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
 								if (Double.valueOf(tfDistanciaMinima2.getText()) <= dist) {
-									panelRelatorio.replaceSelection(
-											"Avião com id: " + String.valueOf(listPlanes.get(i).getId() + " está proximo ao avião com id: " + listPlanes.get(j).getId() + "\n" ));
+									panelRelatorio.replaceSelection("Avião com id: " + String
+											.valueOf(listPlanes.get(i).getId() + " está proximo ao avião com id: "
+													+ listPlanes.get(j).getId() + "\n"));
 									k++;
 								}
 							}
 						}
 					}
 					if (k == 0) {
-						panelRelatorio
-								.replaceSelection("Nenhum avião com uma distancia de " + tfDistanciaMinima2.getText()
-										+ "proximo a outro avião foi encontrado!\n");
+						panelRelatorio.replaceSelection("Nenhum avião com uma distancia de "
+								+ tfDistanciaMinima2.getText() + "proximo a outro avião foi encontrado!\n");
 					}
 				}
 			}
@@ -672,27 +494,261 @@ public class principal {
 		lblDataGrid.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblDataGrid.setBounds(953, 17, 68, 14);
 		frame.getContentPane().add(lblDataGrid);
-		JTable tabela = new JTable(model);
-		tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent event) {
-                System.out.println("////////");
-                ids = tabela.getSelectedRows();
-                System.out.println("ids selecionados");
-                for(int i = 0; i < ids.length; i++) {
-                System.out.println(ids[i]);
-                }
-                System.out.println("ids selecionados fim");
-                panelRadar.mudacor(ids);
-                System.out.println("//////");
-                //if (tabela.getSelectedRows() != -1) {
-                //idSelecionado = (int) tabela.getValueAt(tabela.getSelectedRow(), 0);
-                //}
 
-            }
-        });
+		JTable tabela = new JTable(model);
+		tabela.setRowSelectionAllowed(true);
+		tabela.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+				//System.out.println("////////");
+				ids = tabela.getSelectedRows();
+			//	System.out.println("ids selecionados");
+				for (int i = 0; i < ids.length; i++) {
+				//	System.out.println(ids[i]);
+				}
+			//	System.out.println("ids selecionados fim");
+				panelRadar.mudacor(ids);
+				//System.out.println("//////");
+				// if (tabela.getSelectedRows() != -1) {
+				// idSelecionado = (int) tabela.getValueAt(tabela.getSelectedRow(), 0);
+				// }
+
+			}
+		});
 		JScrollPane barraRolagemDataGrid = new JScrollPane(tabela);
 		barraRolagemDataGrid.setBounds(800, 72, 373, 314);
 		frame.getContentPane().add(barraRolagemDataGrid);
+
+		JButton btnTranslandar = new JButton("Translandar");
+		btnTranslandar.setForeground(Color.BLACK);
+		btnTranslandar.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnTranslandar.setBackground(Color.ORANGE);
+		btnTranslandar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ids = tabela.getSelectedRows();
+				if (!tfPosX2.getText().isEmpty() && !tfPosY2.getText().isEmpty()) {
+					if (ids != null) {
+						for (int i = 0; i < ids.length; i++) {
+							
+							Plane p = new Plane();
+							p = listPlanes.get(ids[i]);
+							p.setX(p.getX() + Double.valueOf(tfPosX2.getText()));
+							p.setY(p.getY() + Double.valueOf(tfPosY2.getText()));
+							p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
+							p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
+							listPlanes.set(ids[i], p);
+							panelRadar.transform(p, ids[i]);
+
+						}
+						auxIds = ids;
+						reescreverTabela();
+
+						for (int i = 0; i < auxIds.length; i++) {
+							if (i == 0) {
+								tabela.setRowSelectionInterval(auxIds[i], auxIds[i]);
+							} else {
+								tabela.addRowSelectionInterval(auxIds[i], auxIds[i]);
+							}
+
+						}
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Preencha os campos!");
+				}
+//				panelRadar.change();
+//				panelRadar.repaint();
+			}
+		});
+		btnTranslandar.setBounds(20, 45, 123, 29);
+		panelFuncTT.add(btnTranslandar);
+
+		JButton btnEscalonar = new JButton("Escalonar");
+		btnEscalonar.setForeground(Color.BLACK);
+		btnEscalonar.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnEscalonar.setBackground(Color.ORANGE);
+		btnEscalonar.setBounds(20, 45, 123, 29);
+		btnEscalonar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ids = tabela.getSelectedRows();
+				if (!tfPosX3.getText().isEmpty() && !tfPosY3.getText().isEmpty()) {
+					if (ids != null) {
+						for (int i = 0; i < ids.length; i++) {
+							Plane p = new Plane();
+							p = listPlanes.get(ids[i]);
+							p.setX(p.getX() * (Double.valueOf(tfPosX3.getText()) / 100));
+							p.setY(p.getY() * (Double.valueOf(tfPosY3.getText()) / 100));
+							p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
+							p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
+							listPlanes.set(ids[i], p);
+							panelRadar.transform(p, ids[i]);
+
+						}
+
+						auxIds = ids;
+						reescreverTabela();
+
+						for (int i = 0; i < auxIds.length; i++) {
+							if (i == 0) {
+								tabela.setRowSelectionInterval(auxIds[i], auxIds[i]);
+							} else {
+								tabela.addRowSelectionInterval(auxIds[i], auxIds[i]);
+							}
+
+						}
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Selecione um avião na tabela!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Preencha os campos!");
+				}
+//				panelRadar.change();
+//				panelRadar.repaint();
+			}
+		});
+		panelFuncTE.add(btnEscalonar);
+
+		JButton btnRotacionar = new JButton("Rotacionar");
+		btnRotacionar.setForeground(Color.BLACK);
+		btnRotacionar.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnRotacionar.setBackground(Color.ORANGE);
+		btnRotacionar.setBounds(20, 45, 123, 29);
+		btnRotacionar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ids = tabela.getSelectedRows();
+				if (!tfPosX4.getText().isEmpty() && !tfPosy4.getText().isEmpty() && !tfAngulo4.getText().isEmpty()) {
+					if (ids != null) {
+						for (int i = 0; i < ids.length; i++) {
+
+							Plane p = new Plane();
+							p = listPlanes.get(ids[i]);
+							double x1, y1, inputx, inputy, sin, cos;
+							// cos + sin angle
+							sin = Math.sin(Double.valueOf(tfAngulo4.getText()) / (180 / Math.PI));
+							cos = Math.cos(Double.valueOf(tfAngulo4.getText()) / (180 / Math.PI));
+							// inputs
+							inputx = Double.valueOf(tfPosX4.getText());
+							inputy = Double.valueOf(tfPosy4.getText());
+							// new x and y
+							x1 = p.getX() - inputx;
+							y1 = p.getY() - inputy;
+							// calc
+							p.setX((x1 * cos) - (y1 * sin));
+							p.setY((y1 * cos) + (x1 * sin));
+
+							p.setX(p.getX() + inputx);
+							p.setY(p.getY() + inputy);
+							p.setAngle(Math.toDegrees(Math.atan2(p.getX(), p.getY())));
+							p.setRaio(Math.sqrt((Math.pow(p.getX(), 2) + Math.pow(p.getY(), 2))));
+							listPlanes.set(ids[i], p);
+							panelRadar.transform(p, ids[i]);
+
+						}
+
+						auxIds = ids;
+						reescreverTabela();
+
+						for (int i = 0; i < auxIds.length; i++) {
+							if (i == 0) {
+								tabela.setRowSelectionInterval(auxIds[i], auxIds[i]);
+							} else {
+								tabela.addRowSelectionInterval(auxIds[i], auxIds[i]);
+							}
+
+						}
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Por favor selecione primeiro na lista");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Preencha os campos!");
+				}
+			}
+		});
+
+		panelFuncTR.add(btnRotacionar);
+
+		JButton btnInserir = new JButton("Inserir");
+		btnInserir.setForeground(Color.BLACK);
+		btnInserir.setBackground(Color.ORANGE);
+		btnInserir.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnInserir.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				double x, y, angle, raio, velocidade, direction;
+				ids = tabela.getSelectedRows();
+
+				if (!tfPosX1.getText().isEmpty() && !tfPosY1.getText().isEmpty()
+						|| !tfRaio1.getText().isEmpty() && !tfAngulo1.getText().isEmpty()) {
+					if (!tfVelocidade.getText().isEmpty() && !tfDirecao.getText().isEmpty()) {
+						velocidade = Double.valueOf(tfVelocidade.getText());
+						direction = Double.valueOf(tfDirecao.getText());
+						if (tfAngulo1.getText().isEmpty() && tfRaio1.getText().isEmpty()) {
+							x = Double.valueOf(tfPosX1.getText());
+							y = Double.valueOf(tfPosY1.getText());
+							// calc angulo
+							angle = Math.toDegrees(Math.atan2(y, x));
+						//	System.out.println("angulo>>>>" + Math.toDegrees(angle));
+							// calc raio
+							raio = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
+						//	System.out.println("Raio>>>>" + raio);
+						} else {
+							angle = Double.valueOf(tfAngulo1.getText());
+							raio = Double.valueOf(tfRaio1.getText());
+							// calc x
+							x = raio * Math.cos(Math.toRadians(angle));
+						//	System.out.println("x>>>>" + x);
+							// calc y
+							y = raio * Math.sin(Math.toRadians(angle));
+						//	System.out.println("y>>>>" + y);
+						}
+						listPlanes.add(new Plane(id, x, y, raio, angle, direction, velocidade));
+
+						panelRadar.setList(listPlanes);
+						panelRadar.repaint();
+						id++;
+						zerarCampos();
+						if (ids != null) {
+							auxIds = ids;
+							reescreverTabela();
+
+							for (int i = 0; i < auxIds.length; i++) {
+							//	System.out.println(auxIds[i]);
+								if (i == 0) {
+									tabela.setRowSelectionInterval(auxIds[i], auxIds[i]);
+								} else {
+									tabela.addRowSelectionInterval(auxIds[i], auxIds[i]);
+								}
+
+							}
+						} else {
+							reescreverTabela();
+						}
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Preencha os campos de Velocidade e Direção");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Preencha os campos de X e Y ou Angulo e Raio!");
+				}
+			}
+		});
+		btnInserir.setBounds(224, 99, 90, 32);
+		panelEntradaDados.add(btnInserir);
 
 		JPanel painelDataGrid = new JPanel();
 		barraRolagemDataGrid.setColumnHeaderView(painelDataGrid);
@@ -716,15 +772,25 @@ public class principal {
 		JButton btnDeletar = new JButton("Deletar");
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listPlanes.remove(idSelecionado);
-				Plane p = new Plane();
-				for (int i = 0; i < listPlanes.size(); i++) {
-					p = listPlanes.get(i);
-					p.setId(i);
+				ids = tabela.getSelectedRows();
+				
+
+				if (ids != null) {
+					
+					for (int i =  ids.length - 1 ; i >= 0 ; i-- ) {
+						listPlanes.remove(ids[i]);
+					}
+					Plane p = new Plane();
+					for (int i = 0; i < listPlanes.size(); i++) {
+						p = listPlanes.get(i);
+						p.setId(i);
+					}
+					id = listPlanes.size();
+
+					reescreverTabela();
+					panelRadar.repaint();
 				}
-				model.limpar();
-				model.addListaDePlanes(listPlanes);
-				panelRadar.repaint();
+
 			}
 		});
 		btnDeletar.setForeground(Color.BLACK);
@@ -732,14 +798,28 @@ public class principal {
 		btnDeletar.setBackground(Color.ORANGE);
 		btnDeletar.setBounds(912, 42, 106, 23);
 		frame.getContentPane().add(btnDeletar);
+		
+		JButton btnExemplo = new JButton("Exemplo");
+		btnExemplo.setForeground(Color.BLACK);
+		btnExemplo.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnExemplo.setBackground(Color.ORANGE);
+		btnExemplo.setBounds(1030, 42, 106, 23);
+		btnExemplo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exemplo();
+			}
+		});
+		frame.getContentPane().add(btnExemplo);
+		
+		
 
 		tabela.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 1) {
-					//panelRadar.mudacor(ids);
-					//panelRadar.repaint();
-					//System.out.println("id selecionado>" + idSelecionado);
-					//System.out.println("SELECIONA COR");
+					// panelRadar.mudacor(ids);
+					// panelRadar.repaint();
+					// System.out.println("id selecionado>" + idSelecionado);
+					// System.out.println("SELECIONA COR");
 				}
 			}
 		});
@@ -762,6 +842,8 @@ public class principal {
 		listPlanes.clear();
 		panelRadar.repaint();
 		id = 0;
+		ids = null;
+		auxIds = null;
 
 	}
 
@@ -772,5 +854,41 @@ public class principal {
 		tfRaio1.setText("");
 		tfVelocidade.setText("");
 		tfDirecao.setText("");
+	}
+	public void exemplo() {
+		double x, y, angle, raio, velocidade, direction;
+		zerarTabela();
+		for(int i = 0; i< 15; i++) {
+			x = generatRandomXY();
+			y = generatRandomXY();
+			direction = generatRandomD();
+			velocidade = generatRandomV();
+			angle = Math.toDegrees(Math.atan2(y, x));
+			raio = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
+			listPlanes.add(new Plane(id, x, y, raio, angle, direction, velocidade));
+			id++;
+		}
+		
+
+		panelRadar.setList(listPlanes);
+		panelRadar.repaint();
+		id++;
+		zerarCampos();
+		reescreverTabela();
+	}
+	public static int generatRandomXY() {
+	    //Random Rand = new Random();
+	    int ii = -150 + (int) (Math.random() * ((100 - (-150)) + 1));
+	    return ii;
+	}
+	public static int generatRandomV() {
+	    //Random Rand = new Random();
+	    int ii = 0 + (int) (Math.random() * ((100 - 0) + 1));
+	    return ii;
+	}
+	public static int generatRandomD() {
+	    //Random Rand = new Random();
+	    int ii = 0 + (int) (Math.random() * ((360 - 0) + 1));
+	    return ii;
 	}
 }
