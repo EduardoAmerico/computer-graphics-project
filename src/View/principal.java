@@ -418,7 +418,7 @@ public class principal {
 								y2 = listPlanes.get(j).getY();
 								// calc dist
 								dist = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
-								if (Double.valueOf(tfDistanciaMinima2.getText()) <= dist) {
+								if (dist <= Double.valueOf(tfDistanciaMinima2.getText())) {
 									panelRelatorio.replaceSelection("Avião com id: " + String
 											.valueOf(listPlanes.get(i).getId() + " está proximo ao avião com id: "
 													+ listPlanes.get(j).getId() + "\n"));
