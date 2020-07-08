@@ -350,6 +350,7 @@ public class principal {
 			public void actionPerformed(ActionEvent e) {
 				int j = 0;
 				if (!tfDistanciaMinima.getText().isEmpty()) {
+					panelRelatorio.setText(null);
 					panelRelatorio.replaceSelection(
 							"Aviões com distancia minima de " + tfDistanciaMinima.getText() + " com o aeroporto: \n");
 					for (int i = 0; i < listPlanes.size(); i++) {
@@ -399,12 +400,14 @@ public class principal {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				double x1, x2;
 				double y1, y2;
 				int k = 0;
 				if (tfDistanciaMinima2.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Informe a distância minima!");
 				} else {
+					panelRelatorio.setText(null);
 					panelRelatorio.replaceSelection(
 							"Aviões com distancia minima de " + tfDistanciaMinima2.getText() + " com outro avião\n");
 					for (int i = 0; i < listPlanes.size(); i++) {
@@ -429,7 +432,10 @@ public class principal {
 					}
 					if (k == 0) {
 						panelRelatorio.replaceSelection("Nenhum avião com uma distancia de "
-								+ tfDistanciaMinima2.getText() + "proximo a outro avião foi encontrado!\n");
+								+ tfDistanciaMinima2.getText() + " proximo a outro avião foi encontrado!\n\n");
+					}
+					else {
+						panelRelatorio.replaceSelection("\n\n");
 					}
 				}
 			}
