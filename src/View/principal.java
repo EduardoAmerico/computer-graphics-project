@@ -278,12 +278,14 @@ public class principal {
 		panelFuncTR.add(lbPosy4);
 
 		tfPosX4 = new JTextField();
+		tfPosX4.setText("0");
 		tfPosX4.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfPosX4.setColumns(10);
 		tfPosX4.setBounds(192, 45, 35, 20);
 		panelFuncTR.add(tfPosX4);
 
 		tfPosy4 = new JTextField();
+		tfPosy4.setText("0");
 		tfPosy4.setFont(new Font("Arial", Font.PLAIN, 12));
 		tfPosy4.setColumns(10);
 		tfPosy4.setBounds(259, 45, 35, 20);
@@ -503,6 +505,8 @@ public class principal {
 
 		JTable tabela = new JTable(model);
 		tabela.setRowSelectionAllowed(true);
+		tabela.getTableHeader().setReorderingAllowed(false);
+		tabela.getTableHeader().setResizingAllowed(false);
 		tabela.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent event) {
@@ -878,7 +882,6 @@ public class principal {
 
 		panelRadar.setList(listPlanes);
 		panelRadar.repaint();
-		id++;
 		zerarCampos();
 		reescreverTabela();
 	}
