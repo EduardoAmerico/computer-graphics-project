@@ -24,6 +24,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ListResourceBundle;
@@ -349,6 +351,7 @@ public class principal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int j = 0;
+				NumberFormat formatter = new DecimalFormat("#0.00");
 				if (!tfDistanciaMinima.getText().isEmpty()) {
 					panelRelatorio.setText(null);
 					panelRelatorio.replaceSelection(
@@ -356,7 +359,8 @@ public class principal {
 					for (int i = 0; i < listPlanes.size(); i++) {
 						if (listPlanes.get(i).getRaio() <= Double.valueOf(tfDistanciaMinima.getText())) {
 							panelRelatorio.replaceSelection(
-									"Avião com id: " + String.valueOf(listPlanes.get(i).getId() + "\n"));
+									"Avião> " + String.valueOf(listPlanes.get(i).getId() + " Distância>" + formatter.format(listPlanes.get(i).getRaio()))+"\n");
+									//"Avião com id: " + String.valueOf(listPlanes.get(i).getId() + "\n"));
 							System.out.println("é menor");
 							j++;
 						}
@@ -403,6 +407,7 @@ public class principal {
 
 				double x1, x2;
 				double y1, y2;
+				NumberFormat formatter = new DecimalFormat("#0.00");
 				int k = 0;
 				if (tfDistanciaMinima2.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Informe a distância minima!");
@@ -422,9 +427,7 @@ public class principal {
 								// calc dist
 								dist = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
 								if (dist <= Double.valueOf(tfDistanciaMinima2.getText())) {
-									panelRelatorio.replaceSelection("Avião com id: " + String
-											.valueOf(listPlanes.get(i).getId() + " está proximo ao avião com id: "
-													+ listPlanes.get(j).getId() + "\n"));
+									panelRelatorio.replaceSelection("Ids(" + listPlanes.get(i).getId() + "," + listPlanes.get(i).getId() + ") Distancia " + formatter.format(dist) + "\n");
 									k++;
 								}
 							}
