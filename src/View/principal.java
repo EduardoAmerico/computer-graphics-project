@@ -355,11 +355,11 @@ public class principal {
 				if (!tfDistanciaMinima.getText().isEmpty()) {
 					panelRelatorio.setText(null);
 					panelRelatorio.replaceSelection(
-							"Aviões com distancia minima de " + tfDistanciaMinima.getText() + " com o aeroporto: \n");
+							"Aviões com distancia minima de " + tfDistanciaMinima.getText() + "Km com o aeroporto: \n");
 					for (int i = 0; i < listPlanes.size(); i++) {
 						if (listPlanes.get(i).getRaio() <= Double.valueOf(tfDistanciaMinima.getText())) {
-							panelRelatorio.replaceSelection("Avião> " + String.valueOf(listPlanes.get(i).getId()
-									+ " Distância>" + formatter.format(listPlanes.get(i).getRaio())) + "\n");
+							panelRelatorio.replaceSelection("Id ( " + String.valueOf(listPlanes.get(i).getId()
+									+ ") Distância de " + formatter.format(listPlanes.get(i).getRaio())) + "Km\n");
 							// "Avião com id: " + String.valueOf(listPlanes.get(i).getId() + "\n"));
 							System.out.println("é menor");
 							j++;
@@ -414,7 +414,7 @@ public class principal {
 				} else {
 					panelRelatorio.setText(null);
 					panelRelatorio.replaceSelection(
-							"Aviões com distancia minima de " + tfDistanciaMinima2.getText() + " com outro avião\n");
+							"Aviões com distancia minima de " + tfDistanciaMinima2.getText() + "Km com outro avião\n");
 					for (int i = 0; i < listPlanes.size(); i++) {
 						x1 = listPlanes.get(i).getX();
 						y1 = listPlanes.get(i).getY();
@@ -429,7 +429,7 @@ public class principal {
 								if (dist <= Double.valueOf(tfDistanciaMinima2.getText())) {
 									panelRelatorio.replaceSelection(
 											"Ids(" + listPlanes.get(i).getId() + "," + listPlanes.get(j).getId()
-													+ ") Distancia " + formatter.format(dist) + "\n");
+													+ ") Distancia de " + formatter.format(dist) + "Km\n");
 									k++;
 								}
 							}
@@ -489,9 +489,11 @@ public class principal {
 				if (tfTempoMin.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Informe o tempo minimo!");
 				} else {
+					int k = 0;
+					int l = 0;
 					panelRelatorio.setText(null);
-					panelRelatorio.replaceSelection(
-							"Aviões em rota de colisão com tempo minimo de " + tfTempoMin.getText() + "s com outro avião:\n");
+					panelRelatorio.replaceSelection("Aviões em rota de colisão com tempo minimo de "
+							+ tfTempoMin.getText() + "s com outro avião:\n");
 					for (int i = 0; i < listPlanes.size(); i++) {
 						x1 = listPlanes.get(i).getX();
 						y1 = listPlanes.get(i).getY();
@@ -499,6 +501,7 @@ public class principal {
 						v1 = listPlanes.get(i).getVelocidade();
 						for (int j = 0; j < listPlanes.size(); j++) {
 							if (i != j && j > i) {
+								k++;
 								System.out.println("testou o avião " + i + " com o avião " + j);
 								x2 = listPlanes.get(j).getX();
 								y2 = listPlanes.get(j).getY();
@@ -509,61 +512,69 @@ public class principal {
 								if (y1 < 0)
 									y1 = y1 * -1;
 								value1 = m1 * (x1 * -1) + (y1);
-								//System.out.println("value 1" + value1);
+								// System.out.println("value 1" + value1);
 								// y = +-x +- value1
 
 								// calc segunda equação
 								if (y2 < 0)
 									y2 = y2 * -1;
 								value2 = m2 * (x2 * -1) + (y2);
-								//System.out.println("value 2" + value2);
+								// System.out.println("value 2" + value2);
 								// y = +-x +- value2
 
 								// achar ponto intersecção
 								// achar x
 								x = value2 + (value1 * -1);
 								x = x / 2;
-								//System.out.println(x + "XXXX");
+								// System.out.println(x + "XXXX");
 								// achar y
 								y = x + (value1);
-								//System.out.println(y + "YYYY");
+								// System.out.println(y + "YYYY");
 
 								// calcular tempo
 								// D2 = Deltx2 + Delty2 v = s/t
 								// d1 --> avião 1
-								//System.out.println("x " + x + " x1 " + x1);
-								//System.out.println("y " + y + " y1 " + y1);
+								// System.out.println("x " + x + " x1 " + x1);
+								// System.out.println("y " + y + " y1 " + y1);
 								d1 = (Math.pow((x - x1), 2)) + (Math.pow((y - y1), 2));
-								//System.out.println("d1" + d1);
+								// System.out.println("d1" + d1);
 								d1 = Math.sqrt(d1);
-								//System.out.println("d1" + d1);
+								// System.out.println("d1" + d1);
 								t1 = d1 / v1;
 								t1 = t1 * 3600; // transforma pra segundo
-								//System.out.println("t1" + t1);
+								// System.out.println("t1" + t1);
 
 								// d2 --> avião2
-								//System.out.println("x " + x + " x2 " + x2);
-								//System.out.println("y " + y + " y2 " + y2);
+								// System.out.println("x " + x + " x2 " + x2);
+								// System.out.println("y " + y + " y2 " + y2);
 								d2 = (Math.pow((x - x2), 2)) + (Math.pow((y - y2), 2));
-								//System.out.println("d2" + d2);
+								// System.out.println("d2" + d2);
 								d2 = Math.sqrt(d2);
-								//System.out.println("d2" + d2);
+								// System.out.println("d2" + d2);
 								t2 = d2 / v2;
 								t2 = t2 * 3600; // transforma pra segundo
-								//System.out.println("t2" + t2);
+								// System.out.println("t2" + t2);
 								// verifica a diferença de tempo
 								dif = Math.abs(t1 - t2);
-								if(t1<0 || t2 <0) {
-									
-								}
-								else if(dif < Double.valueOf(tfTempoMin.getText())){
+								if (t1 < 0 || t2 < 0) {
+
+								} else if (dif < Double.valueOf(tfTempoMin.getText())) {
+									l++;
 									panelRelatorio.replaceSelection(
-											"Ids(" + listPlanes.get(i).getId() + "," + listPlanes.get(j).getId()
-													+ ") Tempo Minimo " + formatter.format(dif) + "s\n");
+											"Ids (" + listPlanes.get(i).getId() + "," + listPlanes.get(j).getId()
+													+ ") Tempo Minimo de " + formatter.format(dif) + "s\n");
 								}
+								
 							}
+							
 						}
+						
 					}
+					if (k == 0 || l==0) {
+						panelRelatorio.replaceSelection(
+								"Nenhum avião com uma tempo minimo de " + tfTempoMin.getText() + "s");
+					}
+					panelRelatorio.replaceSelection("\n\n");
 				}
 			}
 		});
@@ -990,7 +1001,7 @@ public class principal {
 
 	public static int generatRandomV() {
 		// Random Rand = new Random();
-		int ii = 0 + (int) (Math.random() * ((100 - 0) + 1));
+		int ii = 0 + (int) (Math.random() * ((1000 - 0) + 1));
 		return ii;
 	}
 
