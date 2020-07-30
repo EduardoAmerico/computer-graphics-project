@@ -76,7 +76,7 @@ public class principal {
 					principal window = new principal();
 					window.frame.setVisible(true);
 					Double angle = new Double(0);
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -358,9 +358,9 @@ public class principal {
 							"Aviões com distancia minima de " + tfDistanciaMinima.getText() + " com o aeroporto: \n");
 					for (int i = 0; i < listPlanes.size(); i++) {
 						if (listPlanes.get(i).getRaio() <= Double.valueOf(tfDistanciaMinima.getText())) {
-							panelRelatorio.replaceSelection(
-									"Avião> " + String.valueOf(listPlanes.get(i).getId() + " Distância>" + formatter.format(listPlanes.get(i).getRaio()))+"\n");
-									//"Avião com id: " + String.valueOf(listPlanes.get(i).getId() + "\n"));
+							panelRelatorio.replaceSelection("Avião> " + String.valueOf(listPlanes.get(i).getId()
+									+ " Distância>" + formatter.format(listPlanes.get(i).getRaio())) + "\n");
+							// "Avião com id: " + String.valueOf(listPlanes.get(i).getId() + "\n"));
 							System.out.println("é menor");
 							j++;
 						}
@@ -427,7 +427,9 @@ public class principal {
 								// calc dist
 								dist = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
 								if (dist <= Double.valueOf(tfDistanciaMinima2.getText())) {
-									panelRelatorio.replaceSelection("Ids(" + listPlanes.get(i).getId() + "," + listPlanes.get(i).getId() + ") Distancia " + formatter.format(dist) + "\n");
+									panelRelatorio.replaceSelection(
+											"Ids(" + listPlanes.get(i).getId() + "," + listPlanes.get(j).getId()
+													+ ") Distancia " + formatter.format(dist) + "\n");
 									k++;
 								}
 							}
@@ -436,8 +438,7 @@ public class principal {
 					if (k == 0) {
 						panelRelatorio.replaceSelection("Nenhum avião com uma distancia de "
 								+ tfDistanciaMinima2.getText() + " proximo a outro avião foi encontrado!\n\n");
-					}
-					else {
+					} else {
 						panelRelatorio.replaceSelection("\n\n");
 					}
 				}
@@ -468,6 +469,90 @@ public class principal {
 		btnEmRotaColi.setForeground(Color.BLACK);
 		btnEmRotaColi.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnEmRotaColi.setBackground(Color.ORANGE);
+		btnEmRotaColi.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				double x1, x2;
+				double value1;
+				double y1, y2;
+				double value2;
+				double m1, m2;
+				double x, y;
+				double d1, d2;
+				double v1, v2;
+				double t1, t2;
+				double dif;
+
+				NumberFormat formatter = new DecimalFormat("#0.00");
+				if (tfTempoMin.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Informe o tempo minimo!");
+				} else {
+					x1 = 1;
+					y1 = 2;
+					m1 = Math.tan(Math.toRadians(45));
+					v1 = 200;
+					System.out.println("m1" + m1);
+					x2 = 3;
+					y2 = 1;
+					m2 = Math.tan(Math.toRadians(135));
+					v2 = 1600;
+					System.out.println("m2" + m2);
+					// (y2-y1)=m(x2-x1)
+					// calc primeira equação
+					y1 = y1 * -1;
+					value1 = m1*(x1*-1) + (y1);
+					System.out.println("value 1" + value1);
+					// y = +-x +- value1
+
+					// calc segunda equação
+					if (y2 < 0)
+						y2 = y2 * -1;
+					value2 = m2*(x2*-1) + (y2);
+					System.out.println("value 2" + value2);
+					// y = +-x +- value2
+
+					// achar ponto intersecção
+					// achar x
+					x = value2 + (value1 * -1);
+					x = x / 2;
+					System.out.println(x + "XXXX");
+					// achar y
+					y = x + (value1);
+					System.out.println(y + "YYYY");
+					/*
+					// calcular tempo
+					// D2 = Deltx2 + Delty2 v = s/t
+					// d1 --> avião 1
+					System.out.println("x " + x + " x1 " + x1);
+					System.out.println("y " + y + " y1 " + y1);
+					d1 = (Math.pow((x - x1), 2)) + (Math.pow((y - y1), 2));
+					System.out.println("d1" + d1);
+					d1 = Math.sqrt(d1);
+					System.out.println("d1" + d1);
+					t1 = d1 / v1;
+					t1 = t1 * 3600; // transforma pra segundo
+					System.out.println("t1" + t1);
+					
+					
+					
+					// d2 --> avião2
+					System.out.println("x " + x + " x2 " + x2);
+					System.out.println("y " + y + " y2 " + y2);
+					d2 = (Math.pow((x - x2), 2)) + (Math.pow((y - y2), 2));
+					System.out.println("d2" + d2);
+					d2 = Math.sqrt(d2);
+					System.out.println("d2" + d2);
+					t2 = d2 / v2;
+					t2 = t2 * 3600; // transforma pra segundo
+					System.out.println("t2" + t2);
+					// verifica a diferença de tempo
+					dif = Math.abs(t1) - Math.abs(t2);
+	*/
+				}
+			}
+		});
 		btnEmRotaColi.setBounds(20, 45, 154, 29);
 		panelFuncRRC.add(btnEmRotaColi);
 
@@ -509,15 +594,15 @@ public class principal {
 		tabela.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent event) {
-				//System.out.println("////////");
+				// System.out.println("////////");
 				ids = tabela.getSelectedRows();
-			//	System.out.println("ids selecionados");
+				// System.out.println("ids selecionados");
 				for (int i = 0; i < ids.length; i++) {
-				//	System.out.println(ids[i]);
+					// System.out.println(ids[i]);
 				}
-			//	System.out.println("ids selecionados fim");
+				// System.out.println("ids selecionados fim");
 				panelRadar.mudacor(ids);
-				//System.out.println("//////");
+				// System.out.println("//////");
 				// if (tabela.getSelectedRows() != -1) {
 				// idSelecionado = (int) tabela.getValueAt(tabela.getSelectedRow(), 0);
 				// }
@@ -541,7 +626,7 @@ public class principal {
 				if (!tfPosX2.getText().isEmpty() && !tfPosY2.getText().isEmpty()) {
 					if (ids != null) {
 						for (int i = 0; i < ids.length; i++) {
-							
+
 							Plane p = new Plane();
 							p = listPlanes.get(ids[i]);
 							p.setX(p.getX() + Double.valueOf(tfPosX2.getText()));
@@ -711,19 +796,19 @@ public class principal {
 							y = Double.valueOf(tfPosY1.getText());
 							// calc angulo
 							angle = Math.toDegrees(Math.atan2(y, x));
-						//	System.out.println("angulo>>>>" + Math.toDegrees(angle));
+							// System.out.println("angulo>>>>" + Math.toDegrees(angle));
 							// calc raio
 							raio = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
-						//	System.out.println("Raio>>>>" + raio);
+							// System.out.println("Raio>>>>" + raio);
 						} else {
 							angle = Double.valueOf(tfAngulo1.getText());
 							raio = Double.valueOf(tfRaio1.getText());
 							// calc x
 							x = raio * Math.cos(Math.toRadians(angle));
-						//	System.out.println("x>>>>" + x);
+							// System.out.println("x>>>>" + x);
 							// calc y
 							y = raio * Math.sin(Math.toRadians(angle));
-						//	System.out.println("y>>>>" + y);
+							// System.out.println("y>>>>" + y);
 						}
 						listPlanes.add(new Plane(id, x, y, raio, angle, direction, velocidade));
 
@@ -736,7 +821,7 @@ public class principal {
 							reescreverTabela();
 
 							for (int i = 0; i < auxIds.length; i++) {
-							//	System.out.println(auxIds[i]);
+								// System.out.println(auxIds[i]);
 								if (i == 0) {
 									tabela.setRowSelectionInterval(auxIds[i], auxIds[i]);
 								} else {
@@ -782,11 +867,10 @@ public class principal {
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ids = tabela.getSelectedRows();
-				
 
 				if (ids != null) {
-					
-					for (int i =  ids.length - 1 ; i >= 0 ; i-- ) {
+
+					for (int i = ids.length - 1; i >= 0; i--) {
 						listPlanes.remove(ids[i]);
 					}
 					Plane p = new Plane();
@@ -807,7 +891,7 @@ public class principal {
 		btnDeletar.setBackground(Color.ORANGE);
 		btnDeletar.setBounds(912, 42, 106, 23);
 		frame.getContentPane().add(btnDeletar);
-		
+
 		JButton btnExemplo = new JButton("Exemplo");
 		btnExemplo.setForeground(Color.BLACK);
 		btnExemplo.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -819,8 +903,6 @@ public class principal {
 			}
 		});
 		frame.getContentPane().add(btnExemplo);
-		
-		
 
 		tabela.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -864,10 +946,11 @@ public class principal {
 		tfVelocidade.setText("");
 		tfDirecao.setText("");
 	}
+
 	public void exemplo() {
 		double x, y, angle, raio, velocidade, direction;
 		zerarTabela();
-		for(int i = 0; i< 15; i++) {
+		for (int i = 0; i < 15; i++) {
 			x = generatRandomXY();
 			y = generatRandomXY();
 			direction = generatRandomD();
@@ -877,7 +960,6 @@ public class principal {
 			listPlanes.add(new Plane(id, x, y, raio, angle, direction, velocidade));
 			id++;
 		}
-		
 
 		panelRadar.setList(listPlanes);
 		panelRadar.repaint();
@@ -885,19 +967,22 @@ public class principal {
 		zerarCampos();
 		reescreverTabela();
 	}
+
 	public static int generatRandomXY() {
-	    //Random Rand = new Random();
-	    int ii = -150 + (int) (Math.random() * ((100 - (-150)) + 1));
-	    return ii;
+		// Random Rand = new Random();
+		int ii = -150 + (int) (Math.random() * ((100 - (-150)) + 1));
+		return ii;
 	}
+
 	public static int generatRandomV() {
-	    //Random Rand = new Random();
-	    int ii = 0 + (int) (Math.random() * ((100 - 0) + 1));
-	    return ii;
+		// Random Rand = new Random();
+		int ii = 0 + (int) (Math.random() * ((100 - 0) + 1));
+		return ii;
 	}
+
 	public static int generatRandomD() {
-	    //Random Rand = new Random();
-	    int ii = 0 + (int) (Math.random() * ((360 - 0) + 1));
-	    return ii;
+		// Random Rand = new Random();
+		int ii = 0 + (int) (Math.random() * ((360 - 0) + 1));
+		return ii;
 	}
 }
