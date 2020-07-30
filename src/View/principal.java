@@ -489,67 +489,81 @@ public class principal {
 				if (tfTempoMin.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Informe o tempo minimo!");
 				} else {
-					x1 = 1;
-					y1 = 2;
-					m1 = Math.tan(Math.toRadians(45));
-					v1 = 200;
-					System.out.println("m1" + m1);
-					x2 = 3;
-					y2 = 1;
-					m2 = Math.tan(Math.toRadians(135));
-					v2 = 1600;
-					System.out.println("m2" + m2);
-					// (y2-y1)=m(x2-x1)
-					// calc primeira equação
-					y1 = y1 * -1;
-					value1 = m1*(x1*-1) + (y1);
-					System.out.println("value 1" + value1);
-					// y = +-x +- value1
+					panelRelatorio.setText(null);
+					panelRelatorio.replaceSelection(
+							"Aviões em rota de colisão com tempo minimo de " + tfTempoMin.getText() + "s com outro avião:\n");
+					for (int i = 0; i < listPlanes.size(); i++) {
+						x1 = listPlanes.get(i).getX();
+						y1 = listPlanes.get(i).getY();
+						m1 = Math.tan(Math.toRadians(listPlanes.get(i).getDirection()));
+						v1 = listPlanes.get(i).getVelocidade();
+						for (int j = 0; j < listPlanes.size(); j++) {
+							if (i != j && j > i) {
+								System.out.println("testou o avião " + i + " com o avião " + j);
+								x2 = listPlanes.get(j).getX();
+								y2 = listPlanes.get(j).getY();
+								m2 = Math.tan(Math.toRadians(listPlanes.get(j).getDirection()));
+								v2 = listPlanes.get(j).getVelocidade();
+								// (y2-y1)=m(x2-x1)
+								// calc primeira equação
+								if (y1 < 0)
+									y1 = y1 * -1;
+								value1 = m1 * (x1 * -1) + (y1);
+								//System.out.println("value 1" + value1);
+								// y = +-x +- value1
 
-					// calc segunda equação
-					if (y2 < 0)
-						y2 = y2 * -1;
-					value2 = m2*(x2*-1) + (y2);
-					System.out.println("value 2" + value2);
-					// y = +-x +- value2
+								// calc segunda equação
+								if (y2 < 0)
+									y2 = y2 * -1;
+								value2 = m2 * (x2 * -1) + (y2);
+								//System.out.println("value 2" + value2);
+								// y = +-x +- value2
 
-					// achar ponto intersecção
-					// achar x
-					x = value2 + (value1 * -1);
-					x = x / 2;
-					System.out.println(x + "XXXX");
-					// achar y
-					y = x + (value1);
-					System.out.println(y + "YYYY");
-					/*
-					// calcular tempo
-					// D2 = Deltx2 + Delty2 v = s/t
-					// d1 --> avião 1
-					System.out.println("x " + x + " x1 " + x1);
-					System.out.println("y " + y + " y1 " + y1);
-					d1 = (Math.pow((x - x1), 2)) + (Math.pow((y - y1), 2));
-					System.out.println("d1" + d1);
-					d1 = Math.sqrt(d1);
-					System.out.println("d1" + d1);
-					t1 = d1 / v1;
-					t1 = t1 * 3600; // transforma pra segundo
-					System.out.println("t1" + t1);
-					
-					
-					
-					// d2 --> avião2
-					System.out.println("x " + x + " x2 " + x2);
-					System.out.println("y " + y + " y2 " + y2);
-					d2 = (Math.pow((x - x2), 2)) + (Math.pow((y - y2), 2));
-					System.out.println("d2" + d2);
-					d2 = Math.sqrt(d2);
-					System.out.println("d2" + d2);
-					t2 = d2 / v2;
-					t2 = t2 * 3600; // transforma pra segundo
-					System.out.println("t2" + t2);
-					// verifica a diferença de tempo
-					dif = Math.abs(t1) - Math.abs(t2);
-	*/
+								// achar ponto intersecção
+								// achar x
+								x = value2 + (value1 * -1);
+								x = x / 2;
+								//System.out.println(x + "XXXX");
+								// achar y
+								y = x + (value1);
+								//System.out.println(y + "YYYY");
+
+								// calcular tempo
+								// D2 = Deltx2 + Delty2 v = s/t
+								// d1 --> avião 1
+								//System.out.println("x " + x + " x1 " + x1);
+								//System.out.println("y " + y + " y1 " + y1);
+								d1 = (Math.pow((x - x1), 2)) + (Math.pow((y - y1), 2));
+								//System.out.println("d1" + d1);
+								d1 = Math.sqrt(d1);
+								//System.out.println("d1" + d1);
+								t1 = d1 / v1;
+								t1 = t1 * 3600; // transforma pra segundo
+								//System.out.println("t1" + t1);
+
+								// d2 --> avião2
+								//System.out.println("x " + x + " x2 " + x2);
+								//System.out.println("y " + y + " y2 " + y2);
+								d2 = (Math.pow((x - x2), 2)) + (Math.pow((y - y2), 2));
+								//System.out.println("d2" + d2);
+								d2 = Math.sqrt(d2);
+								//System.out.println("d2" + d2);
+								t2 = d2 / v2;
+								t2 = t2 * 3600; // transforma pra segundo
+								//System.out.println("t2" + t2);
+								// verifica a diferença de tempo
+								dif = Math.abs(t1 - t2);
+								if(t1<0 || t2 <0) {
+									
+								}
+								else if(dif < Double.valueOf(tfTempoMin.getText())){
+									panelRelatorio.replaceSelection(
+											"Ids(" + listPlanes.get(i).getId() + "," + listPlanes.get(j).getId()
+													+ ") Tempo Minimo " + formatter.format(dif) + "s\n");
+								}
+							}
+						}
+					}
 				}
 			}
 		});
