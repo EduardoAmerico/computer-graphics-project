@@ -980,7 +980,6 @@ public class principal {
 
 		panelRadar.setList(listPlanes);
 		panelRadar.repaint();
-		id++;
 		zerarCampos();
 		reescreverTabela();
 	}
